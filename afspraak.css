@@ -285,14 +285,80 @@
   .booking-wizard { padding: 36px 28px; }
 }
 
+/* Privacy consent checkbox */
+.consent-group {
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-light);
+}
+.consent-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.consent-check {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  background: rgba(255,255,255,0.03);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.consent-check::after {
+  content: '';
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) scale(0);
+  transition: transform 0.15s ease;
+  margin-top: -2px;
+}
+.consent-label input:checked + .consent-check {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.consent-label input:checked + .consent-check::after {
+  transform: rotate(-45deg) scale(1);
+}
+.consent-label input:focus-visible + .consent-check {
+  box-shadow: 0 0 0 3px rgba(108,92,231,0.3);
+}
+.consent-text a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.consent-text a:hover {
+  color: var(--accent2);
+}
+
 @media (max-width: 600px) {
   .booking-page { padding-top: calc(var(--header-h) + 20px); }
-  .booking-container { margin: 0 12px; border-radius: 16px; }
+  .booking-container { margin: 0 12px; border-radius: 16px; max-width: calc(100vw - 24px); }
   .booking-info { padding: 28px 20px; }
   .booking-info h1 { font-size: 1.4rem; }
   .booking-wizard { padding: 28px 20px; }
   .booking-form .form-row { grid-template-columns: 1fr; }
   .form-actions { flex-direction: column; }
+  .form-actions .btn { width: 100%; justify-content: center; }
   .timeslots-grid { grid-template-columns: repeat(3, 1fr); }
   .confirm-summary { min-width: auto; width: 100%; }
+  .selected-slot-banner { font-size: 0.85rem; word-break: break-word; }
+  .consent-text { font-size: 0.8rem; }
+  .booking-meta { flex-direction: column; gap: 12px; }
 }

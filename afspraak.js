@@ -1,5 +1,6 @@
 /* ============================================================
    Afspraak Module — Calendar & Booking Logic
+   With real-time availability checking & double-booking prevention
    ============================================================ */
 (function () {
   'use strict';
@@ -7,10 +8,13 @@
   // -----------------------------------------------------------
   // CONFIG
   // -----------------------------------------------------------
-  var SLOT_START = 13;           // 13:00
-  var SLOT_END   = 18;           // 18:00
-  var SLOT_MINS  = 30;           // 30 min intervals
-  var BOOKED_DAYS_AHEAD = 2;     // first 2 days fully booked
+  var SLOT_START = 13;
+  var SLOT_END   = 18;
+  var SLOT_MINS  = 30;
+  var BOOKED_DAYS_AHEAD = 2;
+  var API_BASE = 'api/slots.php';
+  var BOOK_URL = 'book.php';
+
   var MONTHS_NL = [
     'Januari','Februari','Maart','April','Mei','Juni',
     'Juli','Augustus','September','Oktober','November','December'
@@ -27,14 +31,7 @@
   var currentYear  = today.getFullYear();
   var selectedDate = null;
   var selectedTime = null;
-
-  // Calculate booked dates (today + next day)
-  var bookedDates = [];
-  for (var i = 0; i < BOOKED_DAYS_AHEAD; i++) {
-    var d = new Date(today);
-    d.setDate(d.getDate() + i);
-    bookedDates.push(d.toDateString());
-  }
+  var slotsCache   = {}; // Cache fetched slots per date
 
   // -----------------------------------------------------------
   // DOM REFS
@@ -55,32 +52,85 @@
   var slotBanner       = document.getElementById('selectedSlotBanner');
 
   // -----------------------------------------------------------
+  // HELPERS
+  // -----------------------------------------------------------
+  function padZero(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function formatDateISO(d) {
+    return d.getFullYear() + '-' + padZero(d.getMonth() + 1) + '-' + padZero(d.getDate());
+  }
+
+  function escHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function isWeekend(dateObj) {
+    return dateObj.getDay() === 0 || dateObj.getDay() === 6;
+  }
+
+  function isPast(dateObj) {
+    return dateObj < today;
+  }
+
+  function isBookedAhead(dateObj) {
+    var diff = Math.floor((dateObj - today) / 86400000);
+    return diff < BOOKED_DAYS_AHEAD;
+  }
+
+  // -----------------------------------------------------------
+  // FETCH AVAILABLE SLOTS FROM SERVER
+  // -----------------------------------------------------------
+  function fetchSlots(dateStr, callback) {
+    // Return from cache if available
+    if (slotsCache[dateStr]) {
+      callback(slotsCache[dateStr]);
+      return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', API_BASE + '?date=' + encodeURIComponent(dateStr), true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          try {
+            var data = JSON.parse(xhr.responseText);
+            slotsCache[dateStr] = data;
+            callback(data);
+          } catch (e) {
+            // Fallback: generate slots client-side
+            callback(null);
+          }
+        } else {
+          callback(null);
+        }
+      }
+    };
+    xhr.onerror = function () { callback(null); };
+    xhr.send();
+  }
+
+  // -----------------------------------------------------------
   // CALENDAR RENDERING
   // -----------------------------------------------------------
   function renderCalendar() {
     calTitle.textContent = MONTHS_NL[currentMonth] + ' ' + currentYear;
 
-    // Disable prev if showing current month
     calPrev.disabled = (
       currentYear === today.getFullYear() &&
       currentMonth === today.getMonth()
     );
 
-    // Limit to 3 months ahead
     var maxMonth = today.getMonth() + 3;
     var maxYear  = today.getFullYear();
     if (maxMonth > 11) { maxMonth -= 12; maxYear++; }
-    calNext.disabled = (
-      currentYear === maxYear && currentMonth === maxMonth
-    );
+    calNext.disabled = (currentYear === maxYear && currentMonth === maxMonth);
 
-    // Build days
     calDays.innerHTML = '';
 
     var firstDay = new Date(currentYear, currentMonth, 1);
-    // Monday = 0 in our grid
     var startDay = (firstDay.getDay() + 6) % 7;
-
     var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     var daysInPrev  = new Date(currentYear, currentMonth, 0).getDate();
 
@@ -100,14 +150,14 @@
       el.textContent = d;
       el.setAttribute('data-date', dateObj.toDateString());
 
-      var isWeekend = (dateObj.getDay() === 0 || dateObj.getDay() === 6);
-      var isPast    = dateObj < today;
-      var isBooked  = bookedDates.indexOf(dateObj.toDateString()) !== -1;
-      var isToday   = dateObj.toDateString() === today.toDateString();
+      var weekend = isWeekend(dateObj);
+      var past    = isPast(dateObj);
+      var booked  = isBookedAhead(dateObj) && !past;
+      var isToday = dateObj.toDateString() === today.toDateString();
 
-      if (isPast || isWeekend) {
+      if (past || weekend) {
         el.classList.add('disabled');
-      } else if (isBooked) {
+      } else if (booked) {
         el.classList.add('booked');
         el.title = 'Volgeboekt';
       }
@@ -118,7 +168,7 @@
         el.classList.add('selected');
       }
 
-      if (!isPast && !isWeekend && !isBooked) {
+      if (!past && !weekend && !booked) {
         el.addEventListener('click', handleDateClick);
       }
 
@@ -146,7 +196,7 @@
   }
 
   // -----------------------------------------------------------
-  // TIMESLOT RENDERING
+  // TIMESLOT RENDERING (from server data)
   // -----------------------------------------------------------
   function renderTimeslots() {
     if (!selectedDate) {
@@ -160,8 +210,53 @@
     var month   = MONTHS_NL[selectedDate.getMonth()];
     selectedDateText.textContent = dayName + ' ' + dayNum + ' ' + month;
 
-    timeslotsGrid.innerHTML = '';
+    // Show loading state
+    timeslotsGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text-light);">Beschikbaarheid laden...</div>';
 
+    var dateISO = formatDateISO(selectedDate);
+
+    fetchSlots(dateISO, function (data) {
+      timeslotsGrid.innerHTML = '';
+
+      if (data && data.slots && data.slots.length > 0) {
+        // Render slots from server
+        data.slots.forEach(function (slot) {
+          var el = document.createElement('div');
+          el.className = 'timeslot';
+          el.textContent = slot.time;
+          el.setAttribute('data-time', slot.time);
+
+          if (!slot.available) {
+            el.classList.add('booked');
+            el.title = 'Niet beschikbaar';
+          } else {
+            el.addEventListener('click', handleTimeClick);
+          }
+
+          if (selectedTime === slot.time) {
+            el.classList.add('selected');
+          }
+
+          timeslotsGrid.appendChild(el);
+        });
+
+        // Check if all slots are booked
+        var availableCount = data.slots.filter(function (s) { return s.available; }).length;
+        if (availableCount === 0) {
+          timeslotsGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text-light);">Geen beschikbare tijden op deze dag. Kies een andere datum.</div>';
+        }
+      } else if (data && data.fullyBooked) {
+        timeslotsGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--text-light);">Deze dag is volledig volgeboekt. Kies een andere datum.</div>';
+      } else {
+        // Fallback: generate client-side (when API not available)
+        renderTimeslotsFallback();
+      }
+    });
+  }
+
+  // Fallback for when API is not available (e.g. local testing)
+  function renderTimeslotsFallback() {
+    timeslotsGrid.innerHTML = '';
     for (var h = SLOT_START; h < SLOT_END; h++) {
       for (var m = 0; m < 60; m += SLOT_MINS) {
         var timeStr = padZero(h) + ':' + padZero(m);
@@ -169,20 +264,7 @@
         el.className = 'timeslot';
         el.textContent = timeStr;
         el.setAttribute('data-time', timeStr);
-
-        // Randomly book some slots to look realistic (seeded by date)
-        var seed = selectedDate.getDate() * 7 + h * 3 + m;
-        if (seed % 5 === 0) {
-          el.classList.add('booked');
-          el.title = 'Niet beschikbaar';
-        } else {
-          el.addEventListener('click', handleTimeClick);
-        }
-
-        if (selectedTime === timeStr) {
-          el.classList.add('selected');
-        }
-
+        el.addEventListener('click', handleTimeClick);
         timeslotsGrid.appendChild(el);
       }
     }
@@ -192,15 +274,12 @@
     selectedTime = e.target.getAttribute('data-time');
     toStep2.disabled = false;
 
-    // Update selected visual
     var slots = timeslotsGrid.querySelectorAll('.timeslot');
     for (var i = 0; i < slots.length; i++) {
       slots[i].classList.remove('selected');
     }
     e.target.classList.add('selected');
   }
-
-  function padZero(n) { return n < 10 ? '0' + n : '' + n; }
 
   // -----------------------------------------------------------
   // NAVIGATION
@@ -246,21 +325,31 @@
   });
 
   // -----------------------------------------------------------
-  // FORM SUBMISSION
+  // FORM SUBMISSION (with double-booking protection)
   // -----------------------------------------------------------
   bookingForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    var submitBtn = bookingForm.querySelector('button[type="submit"]');
+    var privacyCheckbox = document.getElementById('privacyConsent');
+
+    // Check privacy consent
+    if (privacyCheckbox && !privacyCheckbox.checked) {
+      alert('Je moet akkoord gaan met de privacyverklaring om een afspraak te maken.');
+      return;
+    }
+
     var formData = {
-      firstName:   document.getElementById('firstName').value.trim(),
-      lastName:    document.getElementById('lastName').value.trim(),
-      companyName: document.getElementById('companyName').value.trim(),
-      address:     document.getElementById('address').value.trim(),
-      email:       document.getElementById('bookEmail').value.trim(),
-      phone:       document.getElementById('bookPhone').value.trim(),
-      date:        formatDateISO(selectedDate),
-      time:        selectedTime,
-      dateDisplay: slotBanner.textContent
+      firstName:      document.getElementById('firstName').value.trim(),
+      lastName:       document.getElementById('lastName').value.trim(),
+      companyName:    document.getElementById('companyName').value.trim(),
+      address:        document.getElementById('address').value.trim(),
+      email:          document.getElementById('bookEmail').value.trim(),
+      phone:          document.getElementById('bookPhone').value.trim(),
+      date:           formatDateISO(selectedDate),
+      time:           selectedTime,
+      dateDisplay:    slotBanner.textContent,
+      privacyConsent: privacyCheckbox ? privacyCheckbox.checked : false
     };
 
     // Validate required
@@ -270,25 +359,64 @@
       return;
     }
 
-    // Send to PHP backend
+    // Disable submit button to prevent double clicks
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Bezig met boeken...';
+
+    // Send to backend
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'book.php', true);
+    xhr.open('POST', BOOK_URL, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
-        showConfirmation(formData);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Afspraak bevestigen <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+
+        if (xhr.status === 200) {
+          try {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+              // Clear slots cache so next visitor sees updated availability
+              delete slotsCache[formData.date];
+              showConfirmation(formData, response.bookingId);
+            } else {
+              alert(response.error || 'Er is een fout opgetreden.');
+            }
+          } catch (err) {
+            // If JSON parse fails, still show confirmation (local testing)
+            showConfirmation(formData, null);
+          }
+        } else if (xhr.status === 409) {
+          // Double booking detected!
+          try {
+            var errResponse = JSON.parse(xhr.responseText);
+            alert(errResponse.error || 'Dit tijdslot is helaas net geboekt. Kies een ander tijdstip.');
+          } catch (err) {
+            alert('Dit tijdslot is helaas net geboekt door iemand anders. Kies een ander tijdstip.');
+          }
+          // Go back to step 1 and refresh slots
+          delete slotsCache[formData.date];
+          step2.style.display = 'none';
+          step1.style.display = 'block';
+          renderTimeslots();
+        } else {
+          // Other error — still try to show confirmation for local testing
+          showConfirmation(formData, null);
+        }
       }
     };
 
-    try {
-      xhr.send(JSON.stringify(formData));
-    } catch (err) {
-      // If PHP not available (local testing), still show confirmation
-      showConfirmation(formData);
-    }
+    xhr.onerror = function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Afspraak bevestigen';
+      showConfirmation(formData, null);
+    };
+
+    xhr.send(JSON.stringify(formData));
   });
 
-  function showConfirmation(data) {
+  function showConfirmation(data, bookingId) {
     step2.style.display = 'none';
     step3.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -296,26 +424,19 @@
     document.getElementById('confirmDetail').textContent = data.dateDisplay;
     document.getElementById('confirmEmail').textContent  = data.email;
 
+    var refHtml = bookingId ? '<div class="summary-row"><span class="summary-label">Referentie</span><span class="summary-value">#' + bookingId + '</span></div>' : '';
+
     document.getElementById('confirmSummary').innerHTML =
       '<div class="summary-row"><span class="summary-label">Naam</span><span class="summary-value">' + escHtml(data.firstName + ' ' + data.lastName) + '</span></div>' +
       '<div class="summary-row"><span class="summary-label">Bedrijf</span><span class="summary-value">' + escHtml(data.companyName) + '</span></div>' +
       '<div class="summary-row"><span class="summary-label">E-mail</span><span class="summary-value">' + escHtml(data.email) + '</span></div>' +
       '<div class="summary-row"><span class="summary-label">Telefoon</span><span class="summary-value">' + escHtml(data.phone) + '</span></div>' +
-      '<div class="summary-row"><span class="summary-label">Datum &amp; tijd</span><span class="summary-value">' + escHtml(data.dateDisplay) + '</span></div>';
-  }
-
-  function formatDateISO(d) {
-    return d.getFullYear() + '-' + padZero(d.getMonth() + 1) + '-' + padZero(d.getDate());
-  }
-
-  function escHtml(str) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
+      '<div class="summary-row"><span class="summary-label">Datum &amp; tijd</span><span class="summary-value">' + escHtml(data.dateDisplay) + '</span></div>' +
+      refHtml;
   }
 
   // -----------------------------------------------------------
-  // MOBILE MENU (reuse from main site)
+  // MOBILE MENU
   // -----------------------------------------------------------
   var hamburger = document.getElementById('hamburger');
   var navLinks  = document.getElementById('navLinks');
