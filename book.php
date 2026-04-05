@@ -73,8 +73,10 @@ $service = htmlspecialchars(strip_tags(trim($input['service'] ?? '')));
 // Readable labels for pakket and service
 $pakketLabels = [
     'starter'        => 'Starter',
-    'professioneel'  => 'Professioneel',
-    'compleet'       => 'Compleet Ecosysteem',
+    'growth'         => 'Growth',
+    'scale'          => 'Scale',
+    'professioneel'  => 'Growth',
+    'compleet'       => 'Scale',
 ];
 $serviceLabels = [
     'website'           => 'Commerciële website',

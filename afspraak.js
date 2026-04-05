@@ -59,8 +59,11 @@
   // -----------------------------------------------------------
   var PACKAGE_MAP = {
     'starter':        { label: 'Starter', service: 'website' },
-    'professioneel':  { label: 'Professioneel', service: 'lead-intake' },
-    'compleet':       { label: 'Compleet Ecosysteem', service: 'compleet-traject' }
+    'growth':         { label: 'Growth', service: 'lead-intake' },
+    'scale':          { label: 'Scale', service: 'compleet-traject' },
+    // Backward compatibility
+    'professioneel':  { label: 'Growth', service: 'lead-intake' },
+    'compleet':       { label: 'Scale', service: 'compleet-traject' }
   };
 
   var urlParams = new URLSearchParams(window.location.search);

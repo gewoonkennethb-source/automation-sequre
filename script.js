@@ -8,37 +8,39 @@
   // -----------------------------------------------------------
   // 1. STICKY HEADER — add .scrolled class on scroll
   // -----------------------------------------------------------
-  const header = document.getElementById('header');
-  let lastScroll = 0;
-
-  function handleScroll() {
-    const y = window.scrollY;
-    header.classList.toggle('scrolled', y > 40);
-    lastScroll = y;
+  var header = document.getElementById('header');
+  if (header) {
+    function handleScroll() {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
   }
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
 
   // -----------------------------------------------------------
   // 2. MOBILE MENU
   // -----------------------------------------------------------
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.getElementById('navLinks');
 
-  hamburger.addEventListener('click', function () {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-  });
-
-  // Close on link click
-  navLinks.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('active');
-      document.body.style.overflow = '';
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function () {
+      var isActive = hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      document.body.style.overflow = isActive ? 'hidden' : '';
     });
-  });
+
+    // Close on link click
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
   // -----------------------------------------------------------
   // 3. SMOOTH SCROLL for anchor links
@@ -61,82 +63,30 @@
   // -----------------------------------------------------------
   var reveals = document.querySelectorAll('.reveal');
 
-  var revealObserver = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
-    { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
-  );
+  if (reveals.length > 0 && 'IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    );
 
-  reveals.forEach(function (el) {
-    revealObserver.observe(el);
-  });
-
-  // -----------------------------------------------------------
-  // 5. HERO FLOW ANIMATION — cycle through flow items
-  // -----------------------------------------------------------
-  var flowItems = document.querySelectorAll('.flow-item');
-  var activeIndex = 0;
-
-  function cycleFlow() {
-    flowItems.forEach(function (item) {
-      item.classList.remove('active');
+    reveals.forEach(function (el) {
+      revealObserver.observe(el);
     });
-    flowItems[activeIndex].classList.add('active');
-    activeIndex = (activeIndex + 1) % flowItems.length;
-  }
-
-  if (flowItems.length > 0) {
-    setInterval(cycleFlow, 2000);
-  }
-
-  // -----------------------------------------------------------
-  // 6. CONTACT FORM — frontend-only with feedback
-  // -----------------------------------------------------------
-  var contactForm = document.getElementById('contactForm');
-  var formFeedback = document.getElementById('formFeedback');
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      // Collect form data
-      var formData = new FormData(contactForm);
-      var data = {};
-      formData.forEach(function (value, key) {
-        data[key] = value;
-      });
-
-      // Basic validation
-      if (!data.name || !data.email) {
-        formFeedback.textContent = 'Vul alsjeblieft je naam en e-mailadres in.';
-        formFeedback.style.color = '#FF5F57';
-        formFeedback.style.display = 'block';
-        return;
-      }
-
-      // Show success (frontend-only for now)
-      formFeedback.textContent = 'Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.';
-      formFeedback.style.color = '#00E676';
-      formFeedback.style.display = 'block';
-      contactForm.reset();
-
-      // Hide feedback after 5 seconds
-      setTimeout(function () {
-        formFeedback.style.display = 'none';
-      }, 5000);
-
-      // Log to console (can be replaced with actual API call)
-      console.log('Form submission:', data);
+  } else {
+    // Fallback: show everything immediately
+    reveals.forEach(function (el) {
+      el.classList.add('visible');
     });
   }
 
   // -----------------------------------------------------------
-  // 7. ACTIVE NAV HIGHLIGHT on scroll
+  // 5. ACTIVE NAV HIGHLIGHT on scroll
   // -----------------------------------------------------------
   var sections = document.querySelectorAll('section[id]');
   var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
@@ -153,7 +103,7 @@
         navAnchors.forEach(function (a) {
           a.style.color = '';
           if (a.getAttribute('href') === '#' + id && !a.classList.contains('nav-cta')) {
-            a.style.color = '#6C5CE7';
+            a.style.color = 'var(--accent)';
           }
         });
       }
@@ -163,7 +113,7 @@
   window.addEventListener('scroll', highlightNav, { passive: true });
 
   // -----------------------------------------------------------
-  // 8. URGENCY BANNER
+  // 6. URGENCY BANNER (with dynamic availability)
   // -----------------------------------------------------------
   var urgencyBar = document.getElementById('urgencyBar');
   var urgencyClose = document.getElementById('urgencyClose');
@@ -193,7 +143,6 @@
 
             // Update month display from server
             if (urgencyMonthEl && data.month) {
-              // Convert English month to Dutch
               var monthsEN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
               var monthsNL = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
               var monthStr = data.month;
@@ -203,7 +152,7 @@
               urgencyMonthEl.textContent = monthStr + ':';
             }
 
-            // If no slots left, hide banner or show full message
+            // If no slots left, hide banner
             if (remaining === 0) {
               urgencyBar.style.display = 'none';
               document.body.classList.remove('has-urgency');
@@ -227,7 +176,7 @@
   }
 
   // -----------------------------------------------------------
-  // 9. FAQ ACCORDION
+  // 7. FAQ ACCORDION
   // -----------------------------------------------------------
   var faqItems = document.querySelectorAll('.faq-item');
 
@@ -254,7 +203,7 @@
   });
 
   // -----------------------------------------------------------
-  // 10. WEBSITE SCAN FORM
+  // 8. SCAN FORM (Gratis Analyse)
   // -----------------------------------------------------------
   var scanForm = document.getElementById('scanForm');
   var scanFeedback = document.getElementById('scanFeedback');
@@ -274,7 +223,7 @@
         return;
       }
 
-      // Send to backend (can be connected to PHP or n8n later)
+      // Send to backend
       var xhr = new XMLHttpRequest();
       xhr.open('POST', 'scan.php', true);
       xhr.setRequestHeader('Content-Type', 'application/json');
@@ -283,7 +232,7 @@
       } catch (err) { /* graceful fail */ }
 
       scanFeedback.textContent = 'Aanvraag ontvangen! Je ontvangt je gratis analyse binnen 48 uur.';
-      scanFeedback.style.color = '#00E676';
+      scanFeedback.style.color = '#34D399';
       scanFeedback.style.display = 'block';
       scanForm.reset();
 
