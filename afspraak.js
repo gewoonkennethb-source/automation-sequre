@@ -50,6 +50,33 @@
   var backToStep1      = document.getElementById('backToStep1');
   var bookingForm      = document.getElementById('bookingForm');
   var slotBanner       = document.getElementById('selectedSlotBanner');
+  var packageBanner    = document.getElementById('packageBanner');
+  var packageNameEl    = document.getElementById('packageName');
+  var bookServiceEl    = document.getElementById('bookService');
+
+  // -----------------------------------------------------------
+  // PACKAGE FROM URL PARAMETER
+  // -----------------------------------------------------------
+  var PACKAGE_MAP = {
+    'starter':        { label: 'Starter', service: 'website' },
+    'professioneel':  { label: 'Professioneel', service: 'lead-intake' },
+    'compleet':       { label: 'Compleet Ecosysteem', service: 'compleet-traject' }
+  };
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var selectedPackage = urlParams.get('pakket');
+
+  if (selectedPackage && PACKAGE_MAP[selectedPackage]) {
+    var pkg = PACKAGE_MAP[selectedPackage];
+    if (packageBanner && packageNameEl) {
+      packageNameEl.textContent = pkg.label;
+      packageBanner.style.display = 'flex';
+    }
+    // Pre-select matching service in dropdown
+    if (bookServiceEl && pkg.service) {
+      bookServiceEl.value = pkg.service;
+    }
+  }
 
   // -----------------------------------------------------------
   // HELPERS
@@ -339,6 +366,7 @@
       return;
     }
 
+    var serviceEl = document.getElementById('bookService');
     var formData = {
       firstName:      document.getElementById('firstName').value.trim(),
       lastName:       document.getElementById('lastName').value.trim(),
@@ -349,7 +377,9 @@
       date:           formatDateISO(selectedDate),
       time:           selectedTime,
       dateDisplay:    slotBanner.textContent,
-      privacyConsent: privacyCheckbox ? privacyCheckbox.checked : false
+      privacyConsent: privacyCheckbox ? privacyCheckbox.checked : false,
+      pakket:         selectedPackage || '',
+      service:        serviceEl ? serviceEl.value : ''
     };
 
     // Validate required
@@ -426,12 +456,33 @@
 
     var refHtml = bookingId ? '<div class="summary-row"><span class="summary-label">Referentie</span><span class="summary-value">#' + bookingId + '</span></div>' : '';
 
+    var pakketHtml = '';
+    if (data.pakket && PACKAGE_MAP[data.pakket]) {
+      pakketHtml = '<div class="summary-row"><span class="summary-label">Pakket</span><span class="summary-value">' + escHtml(PACKAGE_MAP[data.pakket].label) + '</span></div>';
+    }
+
+    var serviceLabels = {
+      'website': 'Commerciële website',
+      'landing-page': 'Landing page',
+      'lead-intake': 'Lead intake & kwalificatie',
+      'automatisering': 'Procesautomatisering',
+      'ai-leadopvolging': 'AI leadopvolging',
+      'compleet-traject': 'Volledig digitaal ecosysteem',
+      'anders': 'Iets anders / Weet ik nog niet'
+    };
+    var serviceHtml = '';
+    if (data.service && serviceLabels[data.service]) {
+      serviceHtml = '<div class="summary-row"><span class="summary-label">Interesse</span><span class="summary-value">' + escHtml(serviceLabels[data.service]) + '</span></div>';
+    }
+
     document.getElementById('confirmSummary').innerHTML =
       '<div class="summary-row"><span class="summary-label">Naam</span><span class="summary-value">' + escHtml(data.firstName + ' ' + data.lastName) + '</span></div>' +
       '<div class="summary-row"><span class="summary-label">Bedrijf</span><span class="summary-value">' + escHtml(data.companyName) + '</span></div>' +
       '<div class="summary-row"><span class="summary-label">E-mail</span><span class="summary-value">' + escHtml(data.email) + '</span></div>' +
       '<div class="summary-row"><span class="summary-label">Telefoon</span><span class="summary-value">' + escHtml(data.phone) + '</span></div>' +
       '<div class="summary-row"><span class="summary-label">Datum &amp; tijd</span><span class="summary-value">' + escHtml(data.dateDisplay) + '</span></div>' +
+      pakketHtml +
+      serviceHtml +
       refHtml;
   }
 

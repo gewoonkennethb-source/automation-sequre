@@ -66,6 +66,28 @@ $dateDisplay = htmlspecialchars(strip_tags(trim($input['dateDisplay'] ?? '')));
 $consent     = !empty($input['privacyConsent']);
 $ip          = $_SERVER['REMOTE_ADDR'] ?? '';
 
+// Optional fields: pakket & service
+$pakket  = htmlspecialchars(strip_tags(trim($input['pakket'] ?? '')));
+$service = htmlspecialchars(strip_tags(trim($input['service'] ?? '')));
+
+// Readable labels for pakket and service
+$pakketLabels = [
+    'starter'        => 'Starter',
+    'professioneel'  => 'Professioneel',
+    'compleet'       => 'Compleet Ecosysteem',
+];
+$serviceLabels = [
+    'website'           => 'Commerciële website',
+    'landing-page'      => 'Landing page',
+    'lead-intake'       => 'Lead intake & kwalificatie',
+    'automatisering'    => 'Procesautomatisering',
+    'ai-leadopvolging'  => 'AI leadopvolging',
+    'compleet-traject'  => 'Volledig digitaal ecosysteem',
+    'anders'            => 'Iets anders / Weet ik nog niet',
+];
+$pakketDisplay  = $pakketLabels[$pakket] ?? '';
+$serviceDisplay = $serviceLabels[$service] ?? '';
+
 // --- Validate date format ---
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
     http_response_code(400);
@@ -137,6 +159,25 @@ $customerHtml = <<<HTML
               <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">30 minuten</td></tr>
           <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Referentie</td>
               <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">#{$result['bookingId']}</td></tr>
+HTML;
+
+// Conditionally add pakket row
+if ($pakketDisplay) {
+    $customerHtml .= <<<HTML
+          <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Pakket</td>
+              <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">{$pakketDisplay}</td></tr>
+HTML;
+}
+
+// Conditionally add service row
+if ($serviceDisplay) {
+    $customerHtml .= <<<HTML
+          <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Interesse</td>
+              <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">{$serviceDisplay}</td></tr>
+HTML;
+}
+
+$customerHtml .= <<<HTML
         </table>
       </div>
       <p style="font-size:14px;line-height:1.6;margin:0 0 24px;">
@@ -191,6 +232,25 @@ $adminHtml = <<<HTML
           <td style="padding:10px;border-bottom:1px solid #eee;font-weight:600;">{$time} - {$endTime}</td></tr>
       <tr><td style="padding:10px;color:#888;">AVG-toestemming</td>
           <td style="padding:10px;color:#27ae60;font-weight:600;">Gegeven</td></tr>
+HTML;
+
+// Conditionally add pakket row to admin email
+if ($pakketDisplay) {
+    $adminHtml .= <<<HTML
+      <tr><td style="padding:10px;border-top:1px solid #eee;color:#888;">Pakket</td>
+          <td style="padding:10px;border-top:1px solid #eee;font-weight:600;color:#6C5CE7;">{$pakketDisplay}</td></tr>
+HTML;
+}
+
+// Conditionally add service row to admin email
+if ($serviceDisplay) {
+    $adminHtml .= <<<HTML
+      <tr><td style="padding:10px;border-top:1px solid #eee;color:#888;">Interesse</td>
+          <td style="padding:10px;border-top:1px solid #eee;font-weight:600;">{$serviceDisplay}</td></tr>
+HTML;
+}
+
+$adminHtml .= <<<HTML
     </table>
   </div>
 </body>

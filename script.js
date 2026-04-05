@@ -174,6 +174,47 @@
       urgencyBar.style.display = 'none';
     } else {
       document.body.classList.add('has-urgency');
+
+      // Fetch dynamic availability from API
+      var urgencySlotsEl = document.getElementById('urgencySlots');
+      var urgencyMonthEl = document.getElementById('urgencyMonth');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'api/availability.php', true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          try {
+            var data = JSON.parse(xhr.responseText);
+            var remaining = data.remainingSlots;
+
+            if (urgencySlotsEl) {
+              urgencySlotsEl.textContent = remaining + (remaining === 1 ? ' plek' : ' plekken');
+            }
+
+            // Update month display from server
+            if (urgencyMonthEl && data.month) {
+              // Convert English month to Dutch
+              var monthsEN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+              var monthsNL = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+              var monthStr = data.month;
+              monthsEN.forEach(function (en, i) {
+                monthStr = monthStr.replace(en, monthsNL[i].charAt(0).toUpperCase() + monthsNL[i].slice(1));
+              });
+              urgencyMonthEl.textContent = monthStr + ':';
+            }
+
+            // If no slots left, hide banner or show full message
+            if (remaining === 0) {
+              urgencyBar.style.display = 'none';
+              document.body.classList.remove('has-urgency');
+            }
+          } catch (e) {
+            // Keep static fallback on parse error
+          }
+        }
+      };
+      xhr.onerror = function () { /* Keep static fallback */ };
+      xhr.send();
     }
 
     if (urgencyClose) {
