@@ -955,7 +955,68 @@ h3 { font-size: var(--h3); }
 }
 
 /* -----------------------------------------------------------
-   22. RESPONSIVE — MUST BE LAST (CSS cascade order critical)
+   22. NEW CRO ELEMENTS
+   ----------------------------------------------------------- */
+
+/* Pricing indicator (price range on cards) */
+.pricing-indicator {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent2);
+  background: rgba(0, 210, 255, 0.08);
+  border: 1px solid rgba(0, 210, 255, 0.15);
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-top: 12px;
+  letter-spacing: 0.02em;
+}
+
+/* Case industry context badge */
+.case-industry {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Mid-page section CTA */
+.section-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+.section-cta .btn {
+  font-size: 0.95rem;
+  padding: 14px 32px;
+}
+
+/* Form trust signals */
+.form-trust {
+  font-size: 0.85rem;
+  color: var(--success);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.form-privacy {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+.form-privacy a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.form-privacy a:hover {
+  text-decoration: underline;
+}
+
+/* -----------------------------------------------------------
+   23. RESPONSIVE — MUST BE LAST (CSS cascade order critical)
    ----------------------------------------------------------- */
 
 /* 1280px — small desktop */
@@ -1019,6 +1080,9 @@ h3 { font-size: var(--h3); }
   .urgency-inner { font-size: 0.8rem; text-align: center; flex-wrap: wrap; }
 
   .analyse-wrapper { gap: 32px; }
+
+  .section-cta { margin-top: 32px; }
+  .section-cta .btn { font-size: 0.88rem; padding: 12px 24px; }
 }
 
 /* 480px — large phone */
@@ -1041,6 +1105,8 @@ h3 { font-size: var(--h3); }
 
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+  .section-cta .btn { width: 100%; justify-content: center; white-space: normal; }
 }
 
 /* 414px — iPhone Plus / large phones */
