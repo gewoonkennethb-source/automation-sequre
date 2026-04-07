@@ -72,20 +72,22 @@ $service = htmlspecialchars(strip_tags(trim($input['service'] ?? '')));
 
 // Readable labels for pakket and service
 $pakketLabels = [
-    'starter'        => 'Starter',
-    'growth'         => 'Growth',
-    'scale'          => 'Scale',
-    'professioneel'  => 'Growth',
-    'compleet'       => 'Scale',
+    'quickscan'      => 'AI Governance Quickscan',
+    'blueprint'      => 'AI Governance Blueprint',
+    'compliance'     => 'Compliance Service',
+    // Backward compatibility
+    'starter'        => 'AI Governance Quickscan',
+    'growth'         => 'AI Governance Blueprint',
+    'scale'          => 'Compliance Service',
 ];
 $serviceLabels = [
-    'website'           => 'Commerciële website',
-    'landing-page'      => 'Landing page',
-    'lead-intake'       => 'Lead intake & kwalificatie',
-    'automatisering'    => 'Procesautomatisering',
-    'ai-leadopvolging'  => 'AI leadopvolging',
-    'compleet-traject'  => 'Volledig digitaal ecosysteem',
-    'anders'            => 'Iets anders / Weet ik nog niet',
+    'ai-governance-quickscan'  => 'AI Governance Quickscan',
+    'ai-governance-blueprint'  => 'AI Governance Blueprint',
+    'ai-compliance-service'    => 'Responsible AI Compliance Service',
+    'ai-inventarisatie'        => 'AI-inventarisatie en risicoscan',
+    'ai-beleid'                => 'AI-beleid en governancekader',
+    'doorlopend'               => 'Doorlopende compliance ondersteuning',
+    'anders'                   => 'Iets anders / Weet ik nog niet',
 ];
 $pakketDisplay  = $pakketLabels[$pakket] ?? '';
 $serviceDisplay = $serviceLabels[$service] ?? '';

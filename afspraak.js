@@ -58,12 +58,13 @@
   // PACKAGE FROM URL PARAMETER
   // -----------------------------------------------------------
   var PACKAGE_MAP = {
-    'starter':        { label: 'Starter', service: 'website' },
-    'growth':         { label: 'Growth', service: 'lead-intake' },
-    'scale':          { label: 'Scale', service: 'compleet-traject' },
+    'quickscan':      { label: 'AI Governance Quickscan', service: 'ai-governance-quickscan' },
+    'blueprint':      { label: 'AI Governance Blueprint', service: 'ai-governance-blueprint' },
+    'compliance':     { label: 'Compliance Service', service: 'ai-compliance-service' },
     // Backward compatibility
-    'professioneel':  { label: 'Growth', service: 'lead-intake' },
-    'compleet':       { label: 'Scale', service: 'compleet-traject' }
+    'starter':        { label: 'AI Governance Quickscan', service: 'ai-governance-quickscan' },
+    'growth':         { label: 'AI Governance Blueprint', service: 'ai-governance-blueprint' },
+    'scale':          { label: 'Compliance Service', service: 'ai-compliance-service' }
   };
 
   var urlParams = new URLSearchParams(window.location.search);
@@ -465,12 +466,12 @@
     }
 
     var serviceLabels = {
-      'website': 'Commerciële website',
-      'landing-page': 'Landing page',
-      'lead-intake': 'Lead intake & kwalificatie',
-      'automatisering': 'Procesautomatisering',
-      'ai-leadopvolging': 'AI leadopvolging',
-      'compleet-traject': 'Volledig digitaal ecosysteem',
+      'ai-governance-quickscan': 'AI Governance Quickscan',
+      'ai-governance-blueprint': 'AI Governance Blueprint',
+      'ai-compliance-service': 'Responsible AI Compliance Service',
+      'ai-inventarisatie': 'AI-inventarisatie en risicoscan',
+      'ai-beleid': 'AI-beleid en governancekader',
+      'doorlopend': 'Doorlopende compliance ondersteuning',
       'anders': 'Iets anders / Weet ik nog niet'
     };
     var serviceHtml = '';
