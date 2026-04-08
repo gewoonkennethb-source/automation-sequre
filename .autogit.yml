@@ -1,5 +1,5 @@
 production:
   branch: main
   setup:
-    before:
-      - ln -s . www
+    after:
+      - ln -sfn . www
