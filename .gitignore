@@ -19,3 +19,9 @@ package-lock.json
 
 # Logs
 *.log
+
+# TransIP deployment
+.transip_key
+.transip_key.pub
+push-to-transip.bat
+NUL
