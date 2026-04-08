@@ -1,3 +1,5 @@
 production:
   branch: main
-  document_root: /
+  setup:
+    before:
+      - ln -s . www
