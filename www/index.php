@@ -1,3 +1,2 @@
 <?php
-// Redirect to index.html
-require_once 'index.html';
+readfile(__DIR__ . '/index.html');
