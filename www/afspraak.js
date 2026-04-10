@@ -377,6 +377,8 @@
       lastName:       document.getElementById('lastName').value.trim(),
       companyName:    document.getElementById('companyName').value.trim(),
       address:        document.getElementById('address').value.trim(),
+      postcode:       document.getElementById('postcode').value.trim(),
+      city:           document.getElementById('city').value.trim(),
       email:          document.getElementById('bookEmail').value.trim(),
       phone:          document.getElementById('bookPhone').value.trim(),
       date:           formatDateISO(selectedDate),
