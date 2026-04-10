@@ -75,18 +75,21 @@ $pakketLabels = [
     'quickscan'      => 'AI Governance Quickscan',
     'blueprint'      => 'AI Governance Blueprint',
     'compliance'     => 'Compliance Service',
+    'automatisering' => 'AI Automatisering',
     // Backward compatibility
     'starter'        => 'AI Governance Quickscan',
     'growth'         => 'AI Governance Blueprint',
     'scale'          => 'Compliance Service',
 ];
 $serviceLabels = [
+    'inbox-calendar'           => 'AI Inbox & Calendar Manager',
+    'appointment-setter'       => 'AI Appointment Setter',
+    'sales-chatbot'            => 'AI Sales Chatbot',
+    'private-ai'               => 'Private / On-Premise AI',
+    'maatwerk-workflows'       => 'Maatwerk Automation Workflows',
     'ai-governance-quickscan'  => 'AI Governance Quickscan',
     'ai-governance-blueprint'  => 'AI Governance Blueprint',
-    'ai-compliance-service'    => 'Responsible AI Compliance Service',
-    'ai-inventarisatie'        => 'AI-inventarisatie en risicoscan',
-    'ai-beleid'                => 'AI-beleid en governancekader',
-    'doorlopend'               => 'Doorlopende compliance ondersteuning',
+    'ai-compliance-service'    => 'Compliance Service',
     'anders'                   => 'Iets anders / Weet ik nog niet',
 ];
 $pakketDisplay  = $pakketLabels[$pakket] ?? '';

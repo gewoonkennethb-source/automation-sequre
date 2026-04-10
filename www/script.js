@@ -125,9 +125,9 @@
     } else {
       document.body.classList.add('has-urgency');
 
-      // Fetch dynamic availability from API
+      // Fetch dynamic weekly availability from API
       var urgencySlotsEl = document.getElementById('urgencySlots');
-      var urgencyMonthEl = document.getElementById('urgencyMonth');
+      var urgencyPeriodEl = document.getElementById('urgencyPeriod');
 
       var xhr = new XMLHttpRequest();
       xhr.open('GET', 'api/availability.php', true);
@@ -141,15 +141,23 @@
               urgencySlotsEl.textContent = remaining + (remaining === 1 ? ' plek' : ' plekken');
             }
 
-            // Update month display from server
-            if (urgencyMonthEl && data.month) {
-              var monthsEN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-              var monthsNL = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
-              var monthStr = data.month;
-              monthsEN.forEach(function (en, i) {
-                monthStr = monthStr.replace(en, monthsNL[i].charAt(0).toUpperCase() + monthsNL[i].slice(1));
-              });
-              urgencyMonthEl.textContent = monthStr + ':';
+            // Show week period with formatted dates (e.g. "Week 14 apr - 18 apr:")
+            if (urgencyPeriodEl && data.weekStart && data.weekEnd) {
+              var monthsNL = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+              var start = new Date(data.weekStart);
+              var end = new Date(data.weekEnd);
+              var startDay = start.getDate();
+              var endDay = end.getDate();
+              var startMonth = monthsNL[start.getMonth()];
+              var endMonth = monthsNL[end.getMonth()];
+
+              var periodText = 'Week ' + startDay + ' ' + startMonth;
+              if (startMonth !== endMonth) {
+                periodText += ' - ' + endDay + ' ' + endMonth + ':';
+              } else {
+                periodText += ' - ' + endDay + ' ' + startMonth + ':';
+              }
+              urgencyPeriodEl.textContent = periodText;
             }
 
             // If no slots left, hide banner
@@ -212,12 +220,15 @@
     scanForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var url   = document.getElementById('scanUrl').value.trim();
-      var name  = document.getElementById('scanName').value.trim();
-      var email = document.getElementById('scanEmail').value.trim();
+      var name    = document.getElementById('scanName').value.trim();
+      var company = document.getElementById('scanCompany').value.trim();
+      var email   = document.getElementById('scanEmail').value.trim();
+      var phone   = document.getElementById('scanPhone') ? document.getElementById('scanPhone').value.trim() : '';
+      var service = document.getElementById('scanService') ? document.getElementById('scanService').value : '';
+      var message = document.getElementById('scanMessage') ? document.getElementById('scanMessage').value.trim() : '';
 
-      if (!url || !name || !email) {
-        scanFeedback.textContent = 'Vul alle velden in.';
+      if (!name || !company || !email) {
+        scanFeedback.textContent = 'Vul minimaal naam, bedrijfsnaam en e-mailadres in.';
         scanFeedback.style.color = '#FF5F57';
         scanFeedback.style.display = 'block';
         return;
@@ -228,10 +239,10 @@
       xhr.open('POST', 'scan.php', true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       try {
-        xhr.send(JSON.stringify({ url: url, name: name, email: email }));
+        xhr.send(JSON.stringify({ name: name, company: company, email: email, phone: phone, service: service, message: message }));
       } catch (err) { /* graceful fail */ }
 
-      scanFeedback.textContent = 'Aanvraag ontvangen! Je ontvangt je gratis analyse binnen 48 uur.';
+      scanFeedback.textContent = 'Aanvraag ontvangen! We nemen binnen 2 werkdagen contact met u op.';
       scanFeedback.style.color = '#34D399';
       scanFeedback.style.display = 'block';
       scanForm.reset();

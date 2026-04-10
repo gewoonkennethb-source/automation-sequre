@@ -61,6 +61,7 @@
     'quickscan':      { label: 'AI Governance Quickscan', service: 'ai-governance-quickscan' },
     'blueprint':      { label: 'AI Governance Blueprint', service: 'ai-governance-blueprint' },
     'compliance':     { label: 'Compliance Service', service: 'ai-compliance-service' },
+    'automatisering': { label: 'AI Automatisering', service: 'maatwerk-workflows' },
     // Backward compatibility
     'starter':        { label: 'AI Governance Quickscan', service: 'ai-governance-quickscan' },
     'growth':         { label: 'AI Governance Blueprint', service: 'ai-governance-blueprint' },
@@ -466,12 +467,14 @@
     }
 
     var serviceLabels = {
+      'inbox-calendar': 'AI Inbox & Calendar Manager',
+      'appointment-setter': 'AI Appointment Setter',
+      'sales-chatbot': 'AI Sales Chatbot',
+      'private-ai': 'Private / On-Premise AI',
+      'maatwerk-workflows': 'Maatwerk Automation Workflows',
       'ai-governance-quickscan': 'AI Governance Quickscan',
       'ai-governance-blueprint': 'AI Governance Blueprint',
-      'ai-compliance-service': 'Responsible AI Compliance Service',
-      'ai-inventarisatie': 'AI-inventarisatie en risicoscan',
-      'ai-beleid': 'AI-beleid en governancekader',
-      'doorlopend': 'Doorlopende compliance ondersteuning',
+      'ai-compliance-service': 'Compliance Service',
       'anders': 'Iets anders / Weet ik nog niet'
     };
     var serviceHtml = '';
