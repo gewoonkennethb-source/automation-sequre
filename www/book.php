@@ -142,8 +142,14 @@ $postcode  = $personalData['postcode'];
 $city      = $personalData['city'];
 
 // --- Generate .ics calendar file ---
-$icsDateStart = str_replace('-', '', $date) . 'T' . str_replace(':', '', $time) . '00';
-$icsDateEnd   = str_replace('-', '', $date) . 'T' . str_replace(':', '', $endTime) . '00';
+// Convert local Amsterdam time to UTC for maximum calendar app compatibility
+$dtStart = new DateTime("{$date} {$time}", new DateTimeZone('Europe/Amsterdam'));
+$dtEnd   = new DateTime("{$date} {$endTime}", new DateTimeZone('Europe/Amsterdam'));
+$dtStart->setTimezone(new DateTimeZone('UTC'));
+$dtEnd->setTimezone(new DateTimeZone('UTC'));
+
+$icsDateStart = $dtStart->format('Ymd\THis\Z');
+$icsDateEnd   = $dtEnd->format('Ymd\THis\Z');
 $icsUid       = 'aseq-' . $result['bookingId'] . '@automationsequre.nl';
 $icsNow       = gmdate('Ymd\THis\Z');
 $icsDesc      = "Intake gesprek met Automation SeQure\\nReferentie: #{$result['bookingId']}";
@@ -157,8 +163,8 @@ $icsContent .= "METHOD:REQUEST\r\n";
 $icsContent .= "BEGIN:VEVENT\r\n";
 $icsContent .= "UID:{$icsUid}\r\n";
 $icsContent .= "DTSTAMP:{$icsNow}\r\n";
-$icsContent .= "DTSTART;TZID=Europe/Amsterdam:{$icsDateStart}\r\n";
-$icsContent .= "DTEND;TZID=Europe/Amsterdam:{$icsDateEnd}\r\n";
+$icsContent .= "DTSTART:{$icsDateStart}\r\n";
+$icsContent .= "DTEND:{$icsDateEnd}\r\n";
 $icsContent .= "SUMMARY:Intake - Automation SeQure\r\n";
 $icsContent .= "DESCRIPTION:{$icsDesc}\r\n";
 $icsContent .= "ORGANIZER;CN=Automation SeQure:mailto:" . SITE_EMAIL . "\r\n";
