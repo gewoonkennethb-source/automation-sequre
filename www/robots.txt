@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /db/
+Disallow: /includes/
+Disallow: /book.php
+
+Sitemap: https://automationsequre.nl/sitemap.xml

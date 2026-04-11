@@ -1,0 +1,714 @@
+/* ============================================================
+   Pages CSS — Page-specific styles for multi-page site
+   Complements styles.css design system
+   ============================================================ */
+
+/* -----------------------------------------------------------
+   1. NAV DROPDOWN
+   ----------------------------------------------------------- */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: var(--ease-fast);
+}
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle.active {
+  color: var(--heading);
+}
+
+.nav-chevron {
+  transition: transform var(--ease-fast);
+}
+.nav-dropdown-toggle[aria-expanded="true"] .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 260px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 0;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  z-index: 120;
+  opacity: 0;
+  transition: opacity var(--ease-fast);
+}
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+.nav-dropdown-menu.open {
+  display: block;
+  opacity: 1;
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: var(--ease-fast);
+}
+.nav-dropdown-menu a:hover {
+  color: var(--heading);
+  background: rgba(108, 92, 231, 0.08);
+}
+
+/* Active nav link */
+.nav-links a.active {
+  color: var(--accent);
+}
+
+/* -----------------------------------------------------------
+   2. SPLIT HERO (Homepage dual cards)
+   ----------------------------------------------------------- */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+  align-items: stretch;
+}
+
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: var(--ease);
+}
+.hero-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero-card__label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.hero-card--alt .hero-card__label {
+  color: var(--accent2);
+}
+
+.hero-card__title {
+  font-size: var(--h3);
+  color: var(--heading);
+  line-height: var(--leading-tight);
+}
+
+.hero-card__text {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: var(--leading);
+  flex: 1;
+}
+
+.hero-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: var(--ease-fast);
+}
+.hero-card--alt .hero-card__link {
+  color: var(--accent2);
+}
+.hero-card__link:hover {
+  gap: 10px;
+}
+
+/* -----------------------------------------------------------
+   3. PAGE HEADER (Interior pages)
+   ----------------------------------------------------------- */
+.page-header {
+  padding: clamp(100px, 12vw, 140px) 0 clamp(40px, 6vw, 64px);
+  position: relative;
+  overflow: hidden;
+}
+.page-header .hero-glow {
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.page-header__content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+.page-header__title {
+  font-size: var(--h1);
+  margin-bottom: 16px;
+}
+.page-header__subtitle {
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: var(--leading);
+  max-width: 640px;
+}
+
+/* -----------------------------------------------------------
+   4. BREADCRUMBS
+   ----------------------------------------------------------- */
+.breadcrumbs {
+  padding: 16px 0;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+.breadcrumbs ol {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  list-style: none;
+}
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+}
+.breadcrumbs li + li::before {
+  content: '/';
+  margin: 0 8px;
+  color: var(--text-light);
+}
+.breadcrumbs a {
+  color: var(--text);
+  transition: var(--ease-fast);
+}
+.breadcrumbs a:hover {
+  color: var(--heading);
+}
+.breadcrumbs .current {
+  color: var(--text-light);
+}
+
+/* -----------------------------------------------------------
+   5. ROUTE HERO VARIANTS
+   ----------------------------------------------------------- */
+.page-header--accent {
+  background: linear-gradient(180deg, rgba(108, 92, 231, 0.06) 0%, var(--bg) 100%);
+}
+.page-header--accent2 {
+  background: linear-gradient(180deg, rgba(0, 210, 255, 0.04) 0%, var(--bg) 100%);
+}
+.page-header--neutral {
+  background: var(--bg);
+}
+
+/* -----------------------------------------------------------
+   6. TWO-COLUMN LAYOUT HELPERS
+   ----------------------------------------------------------- */
+.layout-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+.layout-two-col--reverse {
+  direction: rtl;
+}
+.layout-two-col--reverse > * {
+  direction: ltr;
+}
+.layout-two-col--centered {
+  align-items: center;
+}
+
+.layout-wide-narrow {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+.layout-narrow-wide {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+
+/* -----------------------------------------------------------
+   7. SERVICE DETAIL SECTIONS
+   ----------------------------------------------------------- */
+.service-section {
+  padding: var(--section-y) 0;
+  border-top: 1px solid var(--border);
+}
+.service-section:first-of-type {
+  border-top: none;
+}
+
+.service-section__header {
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+.service-section__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--accent-glow);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+.service-section--alt .service-section__icon {
+  background: var(--accent2-glow);
+  border-color: rgba(0, 210, 255, 0.15);
+  color: var(--accent2);
+}
+
+.service-section__title {
+  font-size: var(--h2);
+  margin-bottom: 12px;
+}
+.service-section__desc {
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: var(--leading);
+}
+
+.service-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap);
+}
+
+.service-feature {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  transition: var(--ease);
+}
+.service-feature:hover {
+  border-color: var(--border-hover);
+}
+
+.service-feature__title {
+  font-size: var(--h3);
+  margin-bottom: 8px;
+}
+.service-feature__text {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: var(--leading);
+}
+
+/* Anchor scroll offset for sticky header */
+.service-section[id] {
+  scroll-margin-top: 100px;
+}
+
+/* -----------------------------------------------------------
+   8. MOBILE NAV DROPDOWN OVERRIDES
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  .nav-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-dropdown-toggle {
+    font-size: 1.15rem;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    min-width: 100%;
+    background: rgba(19, 19, 32, 0.9);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 8px 0 16px;
+    margin-top: 8px;
+  }
+  .nav-dropdown-menu::before {
+    display: none;
+  }
+  .nav-dropdown-menu a {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  /* Layouts */
+  .hero-split {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-two-col,
+  .layout-wide-narrow,
+  .layout-narrow-wide {
+    grid-template-columns: 1fr;
+  }
+  .layout-two-col--reverse {
+    direction: ltr;
+  }
+
+  .service-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------------------------
+   9. HERO ROUTES (Homepage route cards)
+   ----------------------------------------------------------- */
+.hero-routes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--gap);
+  margin-top: 40px;
+}
+
+.hero-route-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: var(--ease);
+}
+.hero-route-card:hover {
+  border-color: rgba(108, 92, 231, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero-route-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: rgba(108, 92, 231, 0.1);
+  border: 1px solid rgba(108, 92, 231, 0.15);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.hero-route-card--alt .hero-route-icon {
+  background: rgba(0, 210, 255, 0.08);
+  border-color: rgba(0, 210, 255, 0.15);
+  color: var(--accent2);
+}
+
+.hero-route-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: auto;
+  transition: var(--ease-fast);
+}
+.hero-route-card--alt .hero-route-cta {
+  color: var(--accent2);
+}
+.hero-route-cta:hover {
+  gap: 10px;
+}
+
+/* -----------------------------------------------------------
+   10. ROUTES GRID (Landing page route overview)
+   ----------------------------------------------------------- */
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--gap);
+}
+
+.route-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: var(--ease);
+}
+.route-card:hover {
+  border-color: rgba(108, 92, 231, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.route-audience {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.route-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.route-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: var(--leading);
+}
+.route-benefits li::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  background: var(--success);
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / contain no-repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* -----------------------------------------------------------
+   11. TRUST BAR STANDALONE
+   ----------------------------------------------------------- */
+.trust-bar--standalone {
+  padding: var(--section-y) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* -----------------------------------------------------------
+   12. ROUTE HERO (Landing page hero with gradient glow)
+   ----------------------------------------------------------- */
+.hero-route {
+  padding: clamp(100px, 12vw, 160px) 0 clamp(48px, 6vw, 80px);
+  position: relative;
+  overflow: hidden;
+}
+.hero-route::before {
+  content: '';
+  position: absolute;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-route--accent::before {
+  background: radial-gradient(ellipse, rgba(108, 92, 231, 0.12) 0%, transparent 70%);
+}
+.hero-route--accent2::before {
+  background: radial-gradient(ellipse, rgba(0, 210, 255, 0.08) 0%, transparent 70%);
+}
+.hero-route > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* -----------------------------------------------------------
+   13. SERVICE DETAIL SECTIONS (alternative)
+   ----------------------------------------------------------- */
+.service-detail {
+  padding: var(--section-y) 0;
+  border-top: 1px solid var(--border);
+}
+.service-detail:first-of-type {
+  border-top: none;
+}
+
+.service-detail-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+.service-detail--reverse .service-detail-inner {
+  direction: rtl;
+}
+.service-detail--reverse .service-detail-inner > * {
+  direction: ltr;
+}
+
+.service-detail-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.service-detail-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: var(--leading);
+}
+.service-detail-features li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--success);
+}
+
+/* -----------------------------------------------------------
+   14. VALUES GRID (Over ons page)
+   ----------------------------------------------------------- */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap);
+}
+
+.value-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--ease);
+}
+.value-card:hover {
+  border-color: rgba(108, 92, 231, 0.15);
+}
+.value-card h3 {
+  font-size: var(--h3);
+  color: var(--heading);
+}
+.value-card p {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: var(--leading);
+}
+
+/* -----------------------------------------------------------
+   15. CONTACT INFO ITEMS
+   ----------------------------------------------------------- */
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+}
+.contact-info-item + .contact-info-item {
+  border-top: 1px solid var(--border);
+}
+
+.contact-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(108, 92, 231, 0.08);
+  border: 1px solid rgba(108, 92, 231, 0.12);
+  border-radius: var(--radius-xs);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.contact-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.contact-quick-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: var(--ease);
+}
+.contact-quick-links a:hover {
+  border-color: var(--accent);
+  color: var(--heading);
+}
+
+/* -----------------------------------------------------------
+   16. UTILITY — SCROLL ANCHOR OFFSET
+   ----------------------------------------------------------- */
+[id] {
+  scroll-margin-top: 100px;
+}
+
+/* -----------------------------------------------------------
+   RESPONSIVE — Additional mobile overrides
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero-routes {
+    grid-template-columns: 1fr;
+  }
+
+  .routes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-inner {
+    grid-template-columns: 1fr;
+  }
+  .service-detail--reverse .service-detail-inner {
+    direction: ltr;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}

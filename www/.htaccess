@@ -1,8 +1,38 @@
-DirectoryIndex index.html index.php
+DirectoryIndex index.php index.html
 
 # Enable RewriteEngine
 RewriteEngine On
 
+# -------------------------------------------------------
 # Force HTTPS
+# -------------------------------------------------------
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# -------------------------------------------------------
+# Remove trailing slashes (except root)
+# -------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+# -------------------------------------------------------
+# Block access to /includes/ directory
+# -------------------------------------------------------
+RewriteRule ^includes/ - [F,L]
+
+# -------------------------------------------------------
+# Block direct .php access — redirect to clean URL
+# Exceptions: /api/ directory and /book.php
+# -------------------------------------------------------
+RewriteCond %{THE_REQUEST} \s/+(.*?)\.php[\s?] [NC]
+RewriteCond %{THE_REQUEST} !\/api\/ [NC]
+RewriteCond %{THE_REQUEST} !\/book\.php [NC]
+RewriteRule ^(.+)\.php$ /$1 [L,R=301]
+
+# -------------------------------------------------------
+# Clean URLs — serve .php without extension
+# -------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]

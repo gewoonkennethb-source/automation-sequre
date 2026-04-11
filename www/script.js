@@ -31,19 +31,43 @@
       document.body.style.overflow = isActive ? 'hidden' : '';
     });
 
-    // Close on link click
+    // Close on link click (skip dropdown parent links on mobile)
     navLinks.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
+        // Don't close menu if this is a dropdown toggle on mobile
+        if (window.innerWidth < 768 && link.parentElement && link.parentElement.classList.contains('nav-item--has-dropdown')) {
+          return;
+        }
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
         hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       });
     });
+
+    // Mobile dropdown toggle for .nav-item--has-dropdown
+    var dropdownItems = document.querySelectorAll('.nav-item--has-dropdown');
+    dropdownItems.forEach(function (item) {
+      var toggle = item.querySelector('a');
+      if (!toggle) return;
+
+      toggle.addEventListener('click', function (e) {
+        if (window.innerWidth >= 768) return; // Let CSS handle desktop hover
+        e.preventDefault();
+
+        // Close other open dropdowns
+        dropdownItems.forEach(function (other) {
+          if (other !== item) other.classList.remove('open');
+        });
+
+        // Toggle this dropdown
+        item.classList.toggle('open');
+      });
+    });
   }
 
   // -----------------------------------------------------------
-  // 3. SMOOTH SCROLL for anchor links
+  // 3. SMOOTH SCROLL for same-page anchor links only
   // -----------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
@@ -57,6 +81,9 @@
       window.scrollTo({ top: y, behavior: 'smooth' });
     });
   });
+
+  // Don't intercept cross-page links with anchors (e.g. /page#section)
+  // Those use full hrefs and won't match a[href^="#"], so they navigate normally.
 
   // -----------------------------------------------------------
   // 4. SCROLL REVEAL ANIMATIONS
@@ -86,31 +113,45 @@
   }
 
   // -----------------------------------------------------------
-  // 5. ACTIVE NAV HIGHLIGHT on scroll
+  // 5. ACTIVE NAV HIGHLIGHT
   // -----------------------------------------------------------
   var sections = document.querySelectorAll('section[id]');
   var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  var allNavItems = document.querySelectorAll('.nav-links a');
 
-  function highlightNav() {
-    var scrollY = window.scrollY + 120;
-
-    sections.forEach(function (section) {
-      var top = section.offsetTop;
-      var height = section.offsetHeight;
-      var id = section.getAttribute('id');
-
-      if (scrollY >= top && scrollY < top + height) {
-        navAnchors.forEach(function (a) {
-          a.style.color = '';
-          if (a.getAttribute('href') === '#' + id && !a.classList.contains('nav-cta')) {
-            a.style.color = 'var(--accent)';
-          }
-        });
+  // Page-level active state: mark nav item matching data-page
+  var currentPage = document.body.dataset.page;
+  if (currentPage) {
+    allNavItems.forEach(function (a) {
+      if (a.dataset.page === currentPage) {
+        a.classList.add('active');
       }
     });
   }
 
-  window.addEventListener('scroll', highlightNav, { passive: true });
+  // Scroll-spy only on pages that have sections with IDs
+  if (sections.length > 0 && navAnchors.length > 0) {
+    function highlightNav() {
+      var scrollY = window.scrollY + 120;
+
+      sections.forEach(function (section) {
+        var top = section.offsetTop;
+        var height = section.offsetHeight;
+        var id = section.getAttribute('id');
+
+        if (scrollY >= top && scrollY < top + height) {
+          navAnchors.forEach(function (a) {
+            a.style.color = '';
+            if (a.getAttribute('href') === '#' + id && !a.classList.contains('nav-cta')) {
+              a.style.color = 'var(--accent)';
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', highlightNav, { passive: true });
+  }
 
   // -----------------------------------------------------------
   // 6. URGENCY BANNER (with dynamic availability)
@@ -250,6 +291,35 @@
       setTimeout(function () {
         scanFeedback.style.display = 'none';
       }, 6000);
+    });
+  }
+
+  // -----------------------------------------------------------
+  // 9. CASES FILTER
+  // -----------------------------------------------------------
+  var filterBtns = document.querySelectorAll('.cases-filter-btn');
+  var caseCards = document.querySelectorAll('.case-card');
+
+  if (filterBtns.length > 0 && caseCards.length > 0) {
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = btn.dataset.filter;
+
+        // Update active state on buttons
+        filterBtns.forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+
+        // Filter cards
+        caseCards.forEach(function (card) {
+          if (filter === 'all' || card.dataset.route === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
     });
   }
 

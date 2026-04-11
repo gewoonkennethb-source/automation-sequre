@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation SeQure — Veilige AI-automatisering &amp; AI Governance</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="description" content="Automation SeQure automatiseert inbox, agenda, klantcontact en workflows met veilige AI-oplossingen. Voor ondernemers, MKB en gemeenten. Cloud &eacute;n private AI.">
+  <meta property="og:title" content="Automation SeQure — Veilige AI-automatisering &amp; Governance">
+  <meta property="og:description" content="AI-automatisering voor inbox, agenda en klantprocessen. Veilig, begrijpelijk en direct inzetbaar. Voor ondernemers, MKB en gemeenten.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automationsequre.nl">
+  <meta property="og:locale" content="nl_NL">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==================== URGENTIE BANNER ==================== -->
+  <div class="urgency-bar" id="urgencyBar">
+    <div class="container">
+      <div class="urgency-inner">
+        <span class="urgency-pulse"></span>
+        <p><strong id="urgencyPeriod">Deze week:</strong> Nog <strong id="urgencySlots">meerdere plekken</strong> beschikbaar voor een intakegesprek.
+          <a href="afspraak.html">Plan een kennismaking &rarr;</a>
+        </p>
+        <button class="urgency-close" id="urgencyClose" aria-label="Sluiten">&times;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="Automation SeQure homepage">
+        <span class="logo-icon">AS</span>
+        <span class="logo-text">Automation <strong>SeQure</strong></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Hoofdnavigatie">
+        <a href="#diensten">Diensten</a>
+        <a href="#werkwijze">Werkwijze</a>
+        <a href="#resultaten">Resultaten</a>
+        <a href="#pakketten">Pakketten</a>
+        <a href="#faq">FAQ</a>
+        <a href="afspraak.html" class="nav-cta">Plan een gesprek</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="container hero-content">
+      <span class="hero-label">AI Automatisering &middot; Governance &middot; Security</span>
+      <h1 class="hero-headline">Veilige AI-automatisering voor inbox, agenda en klantprocessen.</h1>
+      <p class="hero-sub">AutomationSecure helpt ondernemers en organisaties tijd terug te winnen met praktische AI-oplossingen die veilig, begrijpelijk en direct inzetbaar zijn. Van inbox-management tot maatwerk workflows en AI governance.</p>
+      <div class="hero-buttons">
+        <a href="afspraak.html" class="btn btn-primary">Plan een intake
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#diensten" class="btn btn-outline">Bekijk oplossingen</a>
+      </div>
+      <div class="trust-bar">
+        <div class="trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>5 tot 10 uur tijdswinst per week</span>
+        </div>
+        <div class="trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Cloud &eacute;n private AI mogelijk</span>
+        </div>
+        <div class="trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Security-first, AVG-compliant</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROBLEEMHERKENNING ==================== -->
+  <section class="probleem" id="probleem">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Herkenbaar?</span>
+        <h2 class="section-title">Herkenbaar? Uw tijd gaat op aan werk dat slimmer kan.</h2>
+        <p class="section-intro">Ondernemers, directieleden en organisaties lopen dagelijks tegen dezelfde knelpunten aan. Handmatig werk dat tijd kost, leads die blijven liggen en processen die niet schalen. Terwijl AI deze problemen al kan oplossen.</p>
+      </div>
+      <div class="pain-list reveal">
+        <div class="pain-item">
+          <div class="pain-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <span>Inbox overload: belangrijke e-mails verdwijnen tussen de ruis, opvolging loopt vertraging op</span>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <span>Te veel handmatig opvolgwerk tussen mailbox, agenda, CRM en interne processen</span>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <span>Gemiste leads en trage reactietijden omdat er geen geautomatiseerde opvolging is</span>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <span>Repetitieve processen die tijd kosten maar niet schalen met de groei van uw organisatie</span>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <span>Zorgen over privacy en security bij het inzetten van AI-tools met bedrijfsgevoelige data</span>
+        </div>
+      </div>
+      <p class="probleem-closing reveal">Losse AI-tools zijn niet het antwoord. Wat nodig is: <strong>veilige, op maat gemaakte automatiseringen die aansluiten op uw bestaande processen</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ==================== OPLOSSING ==================== -->
+  <section class="oplossing" id="oplossing">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Onze aanpak</span>
+        <h2 class="section-title">Wij bouwen AI-oplossingen die direct resultaat leveren.</h2>
+        <p class="section-intro">Geen vage adviezen of eindeloze trajecten. Wij automatiseren concrete processen: inbox, agenda, leadopvolging en maatwerk workflows. Veilig ingericht, afgestemd op uw organisatie.</p>
+      </div>
+      <div class="solution-grid reveal">
+        <div class="solution-card">
+          <div class="solution-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <h3>AI-automatisering</h3>
+          <p>Inbox, agenda, klantcontact en workflows automatiseren met AI. Minder handmatig werk, snellere opvolging en meer overzicht.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Veilig en privacyvriendelijk</h3>
+          <p>Cloud of private AI, afhankelijk van uw eisen. Data-minimalisatie, afgeschermde omgevingen en security-first als uitgangspunt.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3>Maatwerk op uw processen</h3>
+          <p>Geen standaardoplossing, maar automatisering afgestemd op het bestaande proceslandschap van uw organisatie. Schaalbaar en onderhoudbaar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOE HET WERKT ==================== -->
+  <section class="werkwijze" id="werkwijze">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Het proces</span>
+        <h2 class="section-title">Van eerste gesprek naar werkende oplossing in vier stappen.</h2>
+      </div>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h3>Intake en procesanalyse</h3>
+          <p>We brengen uw huidige werkprocessen in kaart: waar gaat tijd verloren, welke stappen zijn repetitief en waar biedt AI de meeste waarde?</p>
+        </div>
+        <div class="step-connector" aria-hidden="true">
+          <svg width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M30 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h3>Pilot of proof of value</h3>
+          <p>We bouwen een werkend prototype op uw eigen data en processen. U ervaart direct het resultaat voordat u verder investeert.</p>
+        </div>
+        <div class="step-connector" aria-hidden="true">
+          <svg width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M30 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h3>Implementatie en training</h3>
+          <p>De oplossing wordt volledig ge&iuml;mplementeerd, gekoppeld aan uw bestaande systemen en uw team wordt getraind in het gebruik.</p>
+        </div>
+        <div class="step-connector" aria-hidden="true">
+          <svg width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M30 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="step-card">
+          <span class="step-number">04</span>
+          <h3>Beheer en doorontwikkeling</h3>
+          <p>Wij bewaken de werking, optimaliseren op basis van resultaten en breiden uit waar dat waarde oplevert. U houdt de regie.</p>
+        </div>
+      </div>
+      <div class="section-cta reveal">
+        <a href="afspraak.html" class="btn btn-outline">Wilt u weten wat AI voor uw organisatie kan betekenen? &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DIENSTEN ==================== -->
+  <section class="diensten" id="diensten">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Diensten</span>
+        <h2 class="section-title">Wat we concreet opleveren</h2>
+      </div>
+
+      <!-- AI Automatisering & Workflows -->
+      <h3 class="services-category reveal">AI Automatisering &amp; Workflows</h3>
+      <div class="services-grid services-grid--five reveal">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>AI Inbox &amp; Calendar Manager</h3>
+          <ul class="service-items">
+            <li>Inbox ordenen en e-mails prioriteren</li>
+            <li>Conceptantwoorden en follow-up bewaking</li>
+            <li>Agenda structureren en urgente signaleringen</li>
+            <li>5 tot 10 uur tijdswinst per week</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>AI Appointment Setter</h3>
+          <ul class="service-items">
+            <li>Inbound leads automatisch opvangen</li>
+            <li>Vragen beantwoorden en afspraken inplannen</li>
+            <li>Minder gemiste leads, snellere reactie</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>AI Sales Chatbot</h3>
+          <ul class="service-items">
+            <li>Leads kwalificeren via website, WhatsApp of DM</li>
+            <li>24/7 leadopvolging zonder extra personeel</li>
+            <li>Hogere conversie en consistente communicatie</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Private / On-Premise AI</h3>
+          <ul class="service-items">
+            <li>Lokale of afgeschermde AI-verwerking</li>
+            <li>Data blijft binnen uw eigen omgeving</li>
+            <li>Passend voor security-bewuste organisaties</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Maatwerk Automation Workflows</h3>
+          <ul class="service-items">
+            <li>Automatisering tussen tools, CRM, mailbox en formulieren</li>
+            <li>Minder handmatig werk en minder fouten</li>
+            <li>Snellere doorlooptijden, beter schaalbaar</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- AI Governance & Compliance -->
+      <h3 class="services-category reveal">AI Governance &amp; Compliance</h3>
+      <div class="services-grid reveal">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>AI-inventarisatie en risicoscan</h3>
+          <ul class="service-items">
+            <li>Overzicht van alle AI-toepassingen</li>
+            <li>Risicoclassificatie per toepassing</li>
+            <li>Gap-analyse governance-volwassenheid</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>AI-beleid en governancekader</h3>
+          <ul class="service-items">
+            <li>AI-beleid afgestemd op uw gemeente</li>
+            <li>Intakeproces voor nieuwe AI-use-cases</li>
+            <li>Besluitvormings- en rapportagestructuur</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Geautomatiseerde toetsing en documentatie</h3>
+          <ul class="service-items">
+            <li>Geautomatiseerde intake en risicotoetsing</li>
+            <li>Documentatiegeneratie voor verantwoording</li>
+            <li>Rapportage richting bestuur en raad</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3>Doorlopende compliance ondersteuning</h3>
+          <ul class="service-items">
+            <li>Actualiseren van AI-inventaris</li>
+            <li>Toetsing van nieuwe use-cases</li>
+            <li>Ondersteuning bij audits en evaluaties</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WAAROM WIJ ==================== -->
+  <section class="waarom-wij" id="waarom">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Het verschil</span>
+        <h2 class="section-title">Waarom organisaties kiezen voor Automation SeQure</h2>
+      </div>
+      <div class="reasons-grid reveal">
+        <div class="reason-card">
+          <div class="reason-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Focus op businessresultaat</h3>
+          <p>Geen technisch jargon of eindeloze trajecten. Wij leveren werkende oplossingen die direct tijdswinst, betere opvolging en lagere werkdruk opleveren.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Veilige implementaties</h3>
+          <p>Security-first benadering. Cloud &eacute;n private AI mogelijk. Data-minimalisatie, afgeschermde omgevingen en integratie met bestaande systemen zonder concessies aan veiligheid.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Maatwerk op uw processen</h3>
+          <p>Geen standaardoplossing die u moet aanpassen. Wij ontwerpen automatiseringen die passen op uw bestaande werkwijze, tools en proceslandschap. Geschikt voor MKB en directie.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3>Cybersecurity-minded aanpak</h3>
+          <p>Wij combineren AI-expertise met een security-achtergrond. Elke oplossing wordt gebouwd met oog voor dataveiligheid, privacywetgeving en risicobeheer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESULTATEN ==================== -->
+  <section class="resultaten" id="resultaten">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Impact</span>
+        <h2 class="section-title">Wat onze klanten bereiken met AI-automatisering</h2>
+      </div>
+      <div class="results-list reveal">
+        <div class="result-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>5 tot 10 uur tijdswinst per week door geautomatiseerd inbox- en agendabeheer</span>
+        </div>
+        <div class="result-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Snellere leadopvolging en minder gemiste kansen door AI-gestuurde reacties</span>
+        </div>
+        <div class="result-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Lagere werkdruk door automatisering van repetitieve processen</span>
+        </div>
+        <div class="result-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Hogere conversie door 24/7 leadkwalificatie via chatbot of appointment setter</span>
+        </div>
+        <div class="result-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Volledige controle over data en privacy door private AI-opties</span>
+        </div>
+      </div>
+      <p class="results-note reveal">Iedere organisatie is anders. Daarom beginnen we altijd met een intake om te bepalen waar de meeste waarde zit.</p>
+    </div>
+  </section>
+
+  <!-- ==================== CASES / VOORBEELDSCENARIO'S ==================== -->
+  <section class="cases" id="cases">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">In de praktijk</span>
+        <h2 class="section-title">Voorbeeldscenario's uit de praktijk</h2>
+      </div>
+      <div class="cases-grid reveal">
+        <div class="case-card">
+          <div class="case-industry">Middelgrote gemeente, 800 medewerkers</div>
+          <div class="case-phase">
+            <span class="case-label">Situatie</span>
+            <p>Meerdere afdelingen gebruikten AI-tools zonder centraal overzicht. De gemeentesecretaris kon bij raadsvragen niet aantonen welke AI-toepassingen er draaiden en hoe risico's werden beheerst.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--accent">Aanpak</span>
+            <p>AI-inventarisatie uitgevoerd over alle afdelingen. Risicoclassificatie per toepassing. Governanceproces ingericht met intake, toetsing en rapportageformat voor het bestuur.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--success">Resultaat</span>
+            <p>Volledig overzicht in 3 weken. Bestuur kan verantwoord AI-gebruik aantonen. Nieuw intakeproces voorkomt ongecontroleerde inzet van AI.</p>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-industry">Kleine gemeente, 200 medewerkers</div>
+          <div class="case-phase">
+            <span class="case-label">Situatie</span>
+            <p>De FG signaleerde dat medewerkers generatieve AI gebruikten met persoonsgegevens. Er was geen beleid, geen intake en geen zicht op de omvang.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--accent">Aanpak</span>
+            <p>Quickscan uitgevoerd. AI-beleid opgesteld. Eenvoudig intakeformulier ingericht voor nieuwe AI-use-cases. Rapportageformat opgeleverd voor verantwoording richting bestuur.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--success">Resultaat</span>
+            <p>Binnen 4 weken helder AI-beleid en werkend intakeproces. Privacy officer heeft grip. Bestuur is geïnformeerd.</p>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-industry">CEO van een groeiend MKB-bedrijf</div>
+          <div class="case-phase">
+            <span class="case-label">Situatie</span>
+            <p>De CEO besteedde dagelijks 2-3 uur aan het handmatig verwerken van e-mails, het bijhouden van follow-ups en het structureren van zijn agenda. Belangrijke berichten bleven liggen.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--accent">Aanpak</span>
+            <p>AI Inbox &amp; Calendar Manager ingericht. E-mails worden automatisch geprioriteerd, conceptantwoorden voorbereid en follow-ups bewaakt. Agenda wordt gestructureerd met urgente signaleringen.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--success">Resultaat</span>
+            <p>8 uur tijdswinst per week. Snellere opvolging, minder gemiste berichten en meer focus op strategische taken.</p>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-industry">Dienstverlener met hoog leadvolume</div>
+          <div class="case-phase">
+            <span class="case-label">Situatie</span>
+            <p>Inbound leads via website en WhatsApp werden te laat of helemaal niet beantwoord. Het team had geen capaciteit voor snelle opvolging buiten kantooruren.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--accent">Aanpak</span>
+            <p>AI Sales Chatbot en Appointment Setter ingezet. Leads worden 24/7 gekwalificeerd, vragen beantwoord en afspraken automatisch ingepland in de agenda van het salesteam.</p>
+          </div>
+          <div class="case-phase">
+            <span class="case-label case-label--success">Resultaat</span>
+            <p>40% meer ingeplande afspraken. Gemiddelde reactietijd van uren naar seconden. Geen extra personeel nodig.</p>
+          </div>
+        </div>
+      </div>
+      <div class="section-cta reveal">
+        <a href="afspraak.html" class="btn btn-outline">Wilt u weten wat AI voor uw organisatie kan betekenen? &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAKKETTEN ==================== -->
+  <section class="pakketten" id="pakketten">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Trajecten</span>
+        <h2 class="section-title">Kies het traject dat past bij uw organisatie</h2>
+      </div>
+      <div class="pricing-grid reveal">
+
+        <!-- AI Governance Quickscan -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>AI Governance Quickscan</h3>
+            <span class="pricing-indicator">Vanaf &euro; 4.500</span>
+            <p class="pricing-desc">Inzicht in 4 weken. Wat draait er, wat zijn de risico's, en waar moet u beginnen?</p>
+          </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Inventarisatie van AI-toepassingen
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Eerste risicobeoordeling per toepassing
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Governance gap-analyse
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              90-dagen roadmap met prioriteiten
+            </li>
+          </ul>
+          <a href="afspraak.html?pakket=quickscan" class="btn btn-outline pricing-cta">Start met een quickscan</a>
+        </div>
+
+        <!-- AI Governance Blueprint -->
+        <div class="pricing-card pricing-card--popular">
+          <span class="popular-badge">Meest gekozen</span>
+          <div class="pricing-header">
+            <h3>AI Governance Blueprint</h3>
+            <span class="pricing-indicator">Vanaf &euro; 12.500</span>
+            <p class="pricing-desc">Een compleet governancekader, ingericht en klaar voor gebruik.</p>
+          </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Alles uit de Quickscan
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              AI-beleid op maat van uw gemeente
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Intakeproces voor nieuwe AI-use-cases
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Rapportage- en besluitvormingsstructuur
+            </li>
+          </ul>
+          <a href="afspraak.html?pakket=blueprint" class="btn btn-primary pricing-cta">Richt uw governance in</a>
+        </div>
+
+        <!-- Responsible AI Compliance Service -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Compliance Service</h3>
+            <span class="pricing-indicator">Op maat</span>
+            <p class="pricing-desc">Doorlopende ondersteuning voor grip die blijft. Toetsing, actualisatie en rapportage.</p>
+          </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Alles uit de Blueprint
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Doorlopend actualiseren AI-inventaris
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Toetsing van nieuwe use-cases
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Ondersteuning bij documentatie en audits
+            </li>
+          </ul>
+          <a href="afspraak.html?pakket=compliance" class="btn btn-outline pricing-cta">Bespreek doorlopende ondersteuning</a>
+        </div>
+
+        <!-- AI Automatisering Traject -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>AI Automatisering</h3>
+            <span class="pricing-indicator">Op maat</span>
+            <p class="pricing-desc">Inbox, agenda, leadopvolging of maatwerk workflows automatiseren met veilige AI-oplossingen.</p>
+          </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Intake en procesanalyse
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Pilot of proof of value
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Implementatie, training en koppeling met bestaande tools
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Cloud of private AI, naar keuze
+            </li>
+          </ul>
+          <a href="afspraak.html?pakket=automatisering" class="btn btn-outline pricing-cta">Plan een intake</a>
+        </div>
+
+      </div>
+      <p class="pricing-note reveal">Niet zeker welk traject past? We brengen eerst in kaart waar uw organisatie staat en adviseren op basis van uw situatie.</p>
+    </div>
+  </section>
+
+  <!-- ==================== GRATIS QUICKSCAN CTA ==================== -->
+  <section class="analyse" id="analyse">
+    <div class="container">
+      <div class="analyse-wrapper reveal">
+        <div class="analyse-content">
+          <span class="section-label">Eerste stap</span>
+          <h2 class="section-title">Ontdek wat AI voor uw organisatie kan betekenen</h2>
+          <p>In een vrijblijvend intakegesprek brengen we samen in kaart waar de meeste tijdswinst en effici&euml;ntie te behalen is. Concreet, beknopt en direct toepasbaar.</p>
+          <ul class="analyse-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Analyse van uw huidige werkprocessen
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Identificatie van automatiseringsmogelijkheden
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Advies over veilige AI-implementatie
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Concrete vervolgstappen en indicatie
+            </li>
+          </ul>
+        </div>
+        <form class="analyse-form" id="scanForm" novalidate>
+          <h3>Plan uw intake</h3>
+          <p class="form-trust">We nemen binnen 2 werkdagen contact op. Vrijblijvend.</p>
+          <div class="form-group">
+            <label for="scanName">Naam</label>
+            <input type="text" id="scanName" name="name" placeholder="Uw volledige naam" required>
+          </div>
+          <div class="form-group">
+            <label for="scanCompany">Bedrijfsnaam</label>
+            <input type="text" id="scanCompany" name="company" placeholder="Naam van uw organisatie" required>
+          </div>
+          <div class="form-group">
+            <label for="scanEmail">E-mailadres</label>
+            <input type="email" id="scanEmail" name="email" placeholder="naam@bedrijf.nl" required>
+          </div>
+          <div class="form-group">
+            <label for="scanPhone">Telefoonnummer</label>
+            <input type="tel" id="scanPhone" name="phone" placeholder="06 - 12345678">
+          </div>
+          <div class="form-group">
+            <label for="scanService">Type oplossing</label>
+            <select id="scanService" name="service">
+              <option value="">Selecteer een optie</option>
+              <option value="inbox-calendar">AI Inbox &amp; Calendar Manager</option>
+              <option value="appointment-setter">AI Appointment Setter</option>
+              <option value="sales-chatbot">AI Sales Chatbot</option>
+              <option value="private-ai">Private / On-Premise AI</option>
+              <option value="maatwerk-workflows">Maatwerk Automation Workflows</option>
+              <option value="governance">AI Governance &amp; Compliance</option>
+              <option value="anders">Anders / weet ik nog niet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="scanMessage">Korte beschrijving van uw uitdaging</label>
+            <textarea id="scanMessage" name="message" rows="3" placeholder="Waar loopt u tegenaan? Wat zou u willen automatiseren?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Plan mijn intake
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="form-privacy">Uw gegevens worden niet gedeeld. <a href="privacy.html">Privacyverklaring</a></p>
+          <div class="form-feedback" id="scanFeedback" style="display:none;"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Veelgestelde vragen</span>
+        <h2 class="section-title">Wat u wilt weten voor u begint</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Wat houdt AI governance precies in?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>AI governance is het geheel van beleid, processen en verantwoordelijkheden waarmee een organisatie grip houdt op het gebruik van AI. Dat omvat: weten welke AI-toepassingen er draaien, beoordelen of ze verantwoord zijn, en dat structureel kunnen aantonen richting bestuur, raad en toezichthouders.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is dit relevant als onze gemeente nog weinig AI gebruikt?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Ja. De meeste gemeenten gebruiken meer AI dan ze denken. ChatGPT door medewerkers, AI in leveranciersproducten, voorspelmodellen in het sociaal domein. Een quickscan brengt dit in kaart en voorkomt dat u verrast wordt door de EU AI Act of raadsvragen.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Hoe verhoudt dit zich tot de EU AI Act?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>De EU AI Act stelt eisen aan organisaties die AI-systemen gebruiken, waaronder gemeenten. Denk aan verplichte risicoclassificatie, transparantie-eisen en documentatieplichten. Ons governancekader sluit hier direct op aan, zodat u voorbereid bent wanneer de verplichtingen ingaan.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Wat maakt jullie anders dan een juridisch adviesbureau?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Wij leveren geen juridisch advies. Wij richten een werkbaar governanceproces in en automatiseren waar mogelijk. Intake, toetsing, documentatie en rapportage worden geen handmatige exercities maar gestructureerde processen. Juridische toetsing doen wij in samenwerking met uw FG of juridische afdeling.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Hoe lang duurt een traject?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Een Quickscan levert binnen 4 weken resultaat. Het Blueprint-traject loopt doorgaans 8-12 weken, afhankelijk van de omvang van de gemeente en het aantal afdelingen. De Compliance Service is doorlopend en wordt op maat afgestemd.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Moeten we hier intern veel capaciteit voor vrijmaken?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Minimaal. Wij doen het zware werk: analyse, inrichting, implementatie en automatisering. Wat wij vragen is een aanspreekpunt en toegang tot de relevante systemen en stakeholders.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Werkt dit met Outlook / Microsoft 365?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Ja. Onze AI-oplossingen integreren met Microsoft 365, Outlook, Google Workspace en de meeste gangbare CRM- en planningsystemen. We stemmen de koppeling af op uw bestaande toolset.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Kan dit ook lokaal of on-premise draaien?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Ja. Voor organisaties die privacygevoelige data niet naar publieke AI-platformen willen sturen, bieden wij private of on-premise AI-oplossingen. Data blijft dan volledig binnen uw eigen omgeving.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is dit veilig voor privacygevoelige data?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Absoluut. Security en privacy staan bij ons voorop. We werken met data-minimalisatie, afgeschermde omgevingen en AVG-conforme verwerking. Elke implementatie wordt beoordeeld op dataveiligheid.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Hoe snel kunnen we starten?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Na een intakegesprek kunnen we doorgaans binnen 1-2 weken starten met een pilot. Een eerste werkende oplossing staat er vaak binnen 4 weken, afhankelijk van de complexiteit.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is maatwerk mogelijk?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Ja, maatwerk is ons uitgangspunt. Iedere organisatie heeft andere processen, tools en eisen. Wij ontwerpen en bouwen automatiseringen die passen bij uw specifieke situatie.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Voor welke bedrijven is dit geschikt?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer" role="region">
+            <p>Onze oplossingen zijn geschikt voor ondernemers, CEO's, directieleden, MKB-bedrijven en organisaties met hoge eisen rondom privacy en security. Van eenmanszaak tot middelgrote organisatie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLOT CTA ==================== -->
+  <section class="slot-cta" id="contact">
+    <div class="container">
+      <div class="slot-cta-content reveal">
+        <h2>Klaar om tijd terug te winnen met veilige AI-automatisering?</h2>
+        <p>Wij analyseren uw processen, bouwen een werkende oplossing en zorgen dat het veilig en schaalbaar draait. De eerste stap is een vrijblijvend intakegesprek.</p>
+        <div class="slot-cta-buttons">
+          <a href="afspraak.html" class="btn btn-primary btn-lg">Plan een intake
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#analyse" class="btn btn-outline btn-lg">Of vul het contactformulier in</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="/" class="logo" aria-label="Automation SeQure homepage">
+            <span class="logo-icon">AS</span>
+            <span class="logo-text">Automation <strong>SeQure</strong></span>
+          </a>
+          <p>Veilige AI-automatisering voor ondernemers en organisaties. Inbox, agenda, klantcontact, maatwerk workflows en AI governance.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigatie</h4>
+          <ul class="footer-links">
+            <li><a href="#diensten">Diensten</a></li>
+            <li><a href="#werkwijze">Werkwijze</a></li>
+            <li><a href="#pakketten">Pakketten</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="afspraak.html">Gesprek plannen</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:info@automationsequre.nl">info@automationsequre.nl</a></li>
+            <li>Almere, Nederland</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Juridisch</h4>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacyverklaring</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Automation SeQure. Alle rechten voorbehouden.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
