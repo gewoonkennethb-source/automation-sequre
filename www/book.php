@@ -172,18 +172,24 @@ $icsContent .= "END:VALARM\r\n";
 $icsContent .= "END:VEVENT\r\n";
 $icsContent .= "END:VCALENDAR\r\n";
 
-// --- Google Calendar link ---
-$gcalStart = str_replace('-', '', $date) . 'T' . str_replace(':', '', $time) . '00';
-$gcalEnd   = str_replace('-', '', $date) . 'T' . str_replace(':', '', $endTime) . '00';
-$gcalTitle = rawurlencode("Intake - Automation SeQure");
-$gcalDetails = rawurlencode("Intake gesprek met Automation SeQure\nReferentie: #{$result['bookingId']}");
-$gcalLink = "https://calendar.google.com/calendar/render?action=TEMPLATE&text={$gcalTitle}&dates={$gcalStart}/{$gcalEnd}&details={$gcalDetails}&ctz=Europe/Amsterdam";
+// --- Calendar link variables (shared by customer and admin emails) ---
+$calStart      = $date . 'T' . $time . ':00';
+$calEnd        = $date . 'T' . $endTime . ':00';
+$gcalStart     = str_replace('-', '', $date) . 'T' . str_replace(':', '', $time) . '00';
+$gcalEnd       = str_replace('-', '', $date) . 'T' . str_replace(':', '', $endTime) . '00';
+$gcalTitle     = rawurlencode("Intake - Automation SeQure");
+$gcalDetails   = rawurlencode("Intake gesprek met Automation SeQure\nReferentie: #{$result['bookingId']}");
+$gcalLink      = "https://calendar.google.com/calendar/render?action=TEMPLATE&text={$gcalTitle}&dates={$gcalStart}/{$gcalEnd}&details={$gcalDetails}&ctz=Europe/Amsterdam";
 
-// --- Outlook Web link ---
-$outlookCustomerLink = "https://outlook.office.com/calendar/0/deeplink/compose?subject=" . rawurlencode("Intake - Automation SeQure") . "&startdt={$teamsStart}&enddt={$teamsEnd}&body=" . rawurlencode("Intake gesprek met Automation SeQure\nReferentie: #{$result['bookingId']}");
+// Outlook deeplink for customer (no online=1, no attendee — that's admin-only)
+$outlookCustomerSubject = rawurlencode("Intake - Automation SeQure");
+$outlookCustomerBody    = rawurlencode("Intake gesprek met Automation SeQure\nReferentie: #{$result['bookingId']}");
+$outlookCustomerLink    = "https://outlook.office.com/calendar/0/deeplink/compose?subject={$outlookCustomerSubject}&startdt={$calStart}&enddt={$calEnd}&body={$outlookCustomerBody}";
 
 // --- E-mail naar klant (bevestiging) ---
 $customerSubject = "Bevestiging: Jouw afspraak op {$date} om {$time}";
+$privacyUrl = PRIVACY_POLICY_URL;
+$siteEmail  = SITE_EMAIL;
 
 $customerHtml = <<<HTML
 <!DOCTYPE html>
@@ -197,11 +203,35 @@ $customerHtml = <<<HTML
       </div>
     </div>
     <div style="background:#12121A;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:36px 28px;">
-      <h1 style="color:#EAEDF6;font-size:22px;margin:0 0 8px;">Afspraak bevestigd!</h1>
-      <p style="margin:0 0 24px;font-size:15px;line-height:1.6;">
-        Hoi {$firstName}, bedankt voor het inplannen van een afspraak. Hieronder vind je de details.
-      </p>
-      <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:24px;">
+      <h1 style="color:#EAEDF6;font-size:22px;margin:0 0 6px;">Afspraak bevestigd!</h1>
+      <p style="color:#6B6F80;font-size:13px;margin:0 0 24px;">Referentie #{$result['bookingId']}</p>
+
+      <!-- CTA: Toevoegen aan agenda -->
+      <div style="text-align:center;margin-bottom:28px;">
+        <a href="{$outlookCustomerLink}" target="_blank"
+           style="display:inline-block;background:linear-gradient(135deg,#6C5CE7,#00D2FF);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:10px;">
+          &#128197; Toevoegen aan Outlook Agenda
+        </a>
+      </div>
+
+      <!-- Jouw gegevens -->
+      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Jouw gegevens</p>
+      <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+          <tr><td style="padding:8px 0;color:#6B6F80;width:120px;">Naam</td>
+              <td style="padding:8px 0;color:#EAEDF6;font-weight:600;">{$fullName}</td></tr>
+          <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Bedrijf</td>
+              <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">{$companyName}</td></tr>
+          <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">E-mail</td>
+              <td style="padding:8px 0;color:#EAEDF6;border-top:1px solid rgba(255,255,255,0.06);">{$email}</td></tr>
+          <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Telefoon</td>
+              <td style="padding:8px 0;color:#EAEDF6;border-top:1px solid rgba(255,255,255,0.06);">{$phone}</td></tr>
+        </table>
+      </div>
+
+      <!-- Afspraak details -->
+      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Afspraak</p>
+      <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
           <tr><td style="padding:8px 0;color:#6B6F80;width:120px;">Datum</td>
               <td style="padding:8px 0;color:#EAEDF6;font-weight:600;">{$dateDisplay}</td></tr>
@@ -209,8 +239,6 @@ $customerHtml = <<<HTML
               <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">{$time} - {$endTime}</td></tr>
           <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Duur</td>
               <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">30 minuten</td></tr>
-          <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Referentie</td>
-              <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">#{$result['bookingId']}</td></tr>
 HTML;
 
 // Conditionally add pakket row
@@ -233,30 +261,42 @@ $customerHtml .= <<<HTML
         </table>
       </div>
 
-      <!-- Agenda knoppen -->
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;text-align:center;">Voeg toe aan je agenda</p>
+      <!-- Meer agenda opties -->
+      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;text-align:center;">Andere agenda?</p>
       <div style="text-align:center;margin-bottom:24px;">
         <a href="{$gcalLink}" target="_blank"
            style="display:inline-block;background:#1A1A25;border:1px solid rgba(255,255,255,0.1);color:#EAEDF6;text-decoration:none;font-weight:600;font-size:13px;padding:10px 20px;border-radius:8px;margin:4px;">
-          Google Agenda
-        </a>
-        <a href="{$outlookCustomerLink}" target="_blank"
-           style="display:inline-block;background:#1A1A25;border:1px solid rgba(255,255,255,0.1);color:#EAEDF6;text-decoration:none;font-weight:600;font-size:13px;padding:10px 20px;border-radius:8px;margin:4px;">
-          Outlook
+          &#128197; Google Agenda
         </a>
       </div>
       <p style="text-align:center;font-size:12px;color:#6B6F80;margin:0 0 24px;">
-        iPhone &amp; Android: open het .ics bestand in de bijlage
+        iPhone &amp; Android: open het .ics bestand in de bijlage om toe te voegen aan je agenda.
       </p>
 
-      <p style="font-size:14px;line-height:1.6;margin:0 0 24px;">
-        Wij nemen op het afgesproken tijdstip contact met je op.
-        Heb je vragen? Stuur ons gerust een bericht.
-      </p>
-      <p style="font-size:12px;color:#6B6F80;line-height:1.5;margin:16px 0 0;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;">
+      <!-- Wat kun je verwachten -->
+      <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
+        <p style="color:#EAEDF6;font-size:14px;font-weight:600;margin:0 0 10px;">Wat kun je verwachten?</p>
+        <p style="font-size:14px;line-height:1.6;margin:0;color:#B0B3C0;">
+          Wij nemen op het afgesproken tijdstip contact met je op via Teams of telefoon.
+          Heb je vragen of wil je de afspraak wijzigen? Stuur ons gerust een bericht op
+          <a href="mailto:{$siteEmail}" style="color:#6C5CE7;text-decoration:none;">{$siteEmail}</a>.
+        </p>
+      </div>
+
+      <!-- Spam waarschuwing -->
+      <div style="background:rgba(108,92,231,0.08);border:1px solid rgba(108,92,231,0.2);border-radius:8px;padding:14px 16px;margin-bottom:20px;">
+        <p style="margin:0;font-size:13px;line-height:1.5;color:#B0B3C0;">
+          <span style="color:#6C5CE7;font-weight:700;">&#9993; Tip:</span>
+          Controleer ook je <strong style="color:#EAEDF6;">spam- of ongewenste e-mail map</strong>. Onze e-mails kunnen daar terechtkomen.
+          Markeer ons als veilige afzender om toekomstige berichten direct in je inbox te ontvangen.
+        </p>
+      </div>
+
+      <!-- AVG -->
+      <p style="font-size:12px;color:#6B6F80;line-height:1.5;margin:0;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;">
         Je gegevens worden versleuteld opgeslagen en verwerkt conform onze
-        <a href="{PRIVACY_POLICY_URL}" style="color:#6C5CE7;">privacyverklaring</a>.
-        Je kunt op elk moment verzoeken om verwijdering van je gegevens door te mailen naar {SITE_EMAIL}.
+        <a href="{$privacyUrl}" style="color:#6C5CE7;">privacyverklaring</a>.
+        Je kunt op elk moment verzoeken om verwijdering van je gegevens door te mailen naar {$siteEmail}.
       </p>
     </div>
     <div style="text-align:center;margin-top:32px;font-size:12px;color:#6B6F80;">
@@ -294,8 +334,8 @@ $adminSubject = "Nieuwe afspraak: {$fullName} ({$companyName}) - {$date} {$time}
 
 // Build Outlook/Teams deep link for one-click calendar + Teams meeting creation
 $teamsSubject  = rawurlencode("Intake - {$fullName} ({$companyName})");
-$teamsStart    = $date . 'T' . $time . ':00';
-$teamsEnd      = $date . 'T' . $endTime . ':00';
+$teamsStart    = $calStart;
+$teamsEnd      = $calEnd;
 $teamsBodyText = "Intake gesprek met {$fullName} van {$companyName}\n\nE-mail: {$email}\nTelefoon: {$phone}";
 if ($address || $postcode || $city) {
     $teamsBodyText .= "\nAdres: {$address}, {$postcode} {$city}";
