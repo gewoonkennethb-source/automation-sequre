@@ -31,7 +31,7 @@ $current_page = 'home';
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </a>
-        <a href="/ai-governance" class="hero-route-card">
+        <a href="/ai-governance-gemeenten" class="hero-route-card">
           <div class="hero-route-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
@@ -137,7 +137,7 @@ $current_page = 'home';
               Verantwoording richting bestuur en raad
             </li>
           </ul>
-          <a href="/ai-governance" class="btn btn-primary route-cta">Bekijk AI governance
+          <a href="/ai-governance-gemeenten" class="btn btn-primary route-cta">Bekijk AI governance
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -318,10 +318,10 @@ $current_page = 'home';
         <h2>Klaar om AI veilig en effectief in te zetten?</h2>
         <p>Of u nu processen wilt automatiseren of grip wilt krijgen op AI-gebruik binnen uw gemeente: de eerste stap is een vrijblijvend gesprek.</p>
         <div class="slot-cta-buttons">
-          <a href="afspraak.html?route=automatisering" class="btn btn-primary btn-lg">AI-automatisering bespreken
+          <a href="/afspraak?route=automatisering" class="btn btn-primary btn-lg">AI-automatisering bespreken
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="afspraak.html?route=governance" class="btn btn-outline btn-lg">AI governance bespreken
+          <a href="/afspraak?route=governance" class="btn btn-outline btn-lg">AI governance bespreken
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>

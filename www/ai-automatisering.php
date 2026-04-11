@@ -27,7 +27,7 @@ $current_page = 'automatisering';
         <a href="/#resultaten">Resultaten</a>
         <a href="/#pakketten">Pakketten</a>
         <a href="/#faq">FAQ</a>
-        <a href="/afspraak.html" class="nav-cta">Plan een gesprek</a>
+        <a href="/afspraak" class="nav-cta">Plan een gesprek</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -54,7 +54,7 @@ $current_page = 'automatisering';
       <h1 class="hero-headline">AI-automatisering die uw bedrijf direct tijd bespaart</h1>
       <p class="hero-sub">Automatiseer uw inbox, agenda, klantcontact en leadopvolging met veilige AI-oplossingen. Minder handmatig werk, snellere opvolging en meer focus op wat er toe doet. Gebouwd voor ondernemers, directieleden en groeiende MKB-bedrijven.</p>
       <div class="hero-buttons">
-        <a href="/afspraak.html?pakket=automatisering" class="btn btn-primary">Plan een intake
+        <a href="/afspraak?pakket=automatisering" class="btn btn-primary">Plan een intake
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#werkwijze" class="btn btn-outline">Bekijk onze aanpak</a>
@@ -148,7 +148,7 @@ $current_page = 'automatisering';
         <div class="service-detail-usecase">
           <strong>Voorbeeld:</strong> Een CEO besteedde dagelijks 2-3 uur aan inbox en agenda. Na implementatie bespaart hij 8 uur per week en mist geen belangrijke berichten meer.
         </div>
-        <a href="/afspraak.html?pakket=automatisering&dienst=inbox-calendar" class="btn btn-outline">Meer weten over Inbox &amp; Calendar Manager &rarr;</a>
+        <a href="/afspraak?pakket=automatisering&dienst=inbox-calendar" class="btn btn-outline">Meer weten over Inbox &amp; Calendar Manager &rarr;</a>
       </div>
 
       <!-- Dienst 2: AI Sales Chatbot -->
@@ -170,7 +170,7 @@ $current_page = 'automatisering';
         <div class="service-detail-usecase">
           <strong>Voorbeeld:</strong> Een dienstverlener miste structureel leads buiten kantooruren. Na inzet van de AI Sales Chatbot werden leads binnen seconden beantwoord, met 40% meer ingeplande afspraken als resultaat.
         </div>
-        <a href="/afspraak.html?pakket=automatisering&dienst=sales-chatbot" class="btn btn-outline">Meer weten over de AI Sales Chatbot &rarr;</a>
+        <a href="/afspraak?pakket=automatisering&dienst=sales-chatbot" class="btn btn-outline">Meer weten over de AI Sales Chatbot &rarr;</a>
       </div>
 
       <!-- Dienst 3: AI Appointment Setter -->
@@ -192,7 +192,7 @@ $current_page = 'automatisering';
         <div class="service-detail-usecase">
           <strong>Voorbeeld:</strong> Een servicebedrijf kreeg dagelijks tientallen aanvragen maar kon niet snel genoeg reageren. De AI Appointment Setter plant nu automatisch afspraken in, waardoor het team zich kan richten op de uitvoering.
         </div>
-        <a href="/afspraak.html?pakket=automatisering&dienst=appointment-setter" class="btn btn-outline">Meer weten over de AI Appointment Setter &rarr;</a>
+        <a href="/afspraak?pakket=automatisering&dienst=appointment-setter" class="btn btn-outline">Meer weten over de AI Appointment Setter &rarr;</a>
       </div>
 
       <!-- Dienst 4: Private / On-Premise AI -->
@@ -214,7 +214,7 @@ $current_page = 'automatisering';
         <div class="service-detail-usecase">
           <strong>Voorbeeld:</strong> Een financieel dienstverlener wilde AI inzetten voor documentverwerking maar mocht klantdata niet naar externe platformen sturen. Met private AI draait de verwerking nu volledig intern, met dezelfde snelheid en kwaliteit.
         </div>
-        <a href="/afspraak.html?pakket=automatisering&dienst=private-ai" class="btn btn-outline">Meer weten over Private AI &rarr;</a>
+        <a href="/afspraak?pakket=automatisering&dienst=private-ai" class="btn btn-outline">Meer weten over Private AI &rarr;</a>
       </div>
 
       <!-- Dienst 5: Maatwerk Automation Workflows -->
@@ -236,7 +236,7 @@ $current_page = 'automatisering';
         <div class="service-detail-usecase">
           <strong>Voorbeeld:</strong> Een groeiend MKB-bedrijf verwerkte offerteaanvragen handmatig via e-mail, spreadsheets en CRM. Na automatisering wordt elke aanvraag automatisch verwerkt, het juiste team ge&iuml;nformeerd en de klant binnen minuten bevestigd.
         </div>
-        <a href="/afspraak.html?pakket=automatisering&dienst=maatwerk-workflows" class="btn btn-outline">Meer weten over Maatwerk Workflows &rarr;</a>
+        <a href="/afspraak?pakket=automatisering&dienst=maatwerk-workflows" class="btn btn-outline">Meer weten over Maatwerk Workflows &rarr;</a>
       </div>
 
     </div>
@@ -281,7 +281,7 @@ $current_page = 'automatisering';
         </div>
       </div>
       <div class="section-cta reveal">
-        <a href="/afspraak.html?pakket=automatisering" class="btn btn-outline">Wilt u weten wat AI voor uw bedrijf kan betekenen? &rarr;</a>
+        <a href="/afspraak?pakket=automatisering" class="btn btn-outline">Wilt u weten wat AI voor uw bedrijf kan betekenen? &rarr;</a>
       </div>
     </div>
   </section>
@@ -407,7 +407,7 @@ $current_page = 'automatisering';
               Security-first en AVG-compliant
             </li>
           </ul>
-          <a href="/afspraak.html?pakket=automatisering" class="btn btn-primary pricing-cta">Plan een intake
+          <a href="/afspraak?pakket=automatisering" class="btn btn-primary pricing-cta">Plan een intake
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -508,7 +508,7 @@ $current_page = 'automatisering';
         <h2>Klaar om tijd terug te winnen met veilige AI-automatisering?</h2>
         <p>Wij analyseren uw processen, bouwen een werkende oplossing en zorgen dat het veilig en schaalbaar draait. De eerste stap is een vrijblijvend intakegesprek.</p>
         <div class="slot-cta-buttons">
-          <a href="/afspraak.html?pakket=automatisering" class="btn btn-primary btn-lg">Plan een intake
+          <a href="/afspraak?pakket=automatisering" class="btn btn-primary btn-lg">Plan een intake
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="mailto:info@automationsequre.nl" class="btn btn-outline btn-lg">Of mail ons direct</a>
@@ -538,7 +538,7 @@ $current_page = 'automatisering';
             <li><a href="/#werkwijze">Werkwijze</a></li>
             <li><a href="/#pakketten">Pakketten</a></li>
             <li><a href="/#faq">FAQ</a></li>
-            <li><a href="/afspraak.html">Gesprek plannen</a></li>
+            <li><a href="/afspraak">Gesprek plannen</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -551,7 +551,7 @@ $current_page = 'automatisering';
         <div class="footer-col">
           <h4>Juridisch</h4>
           <ul class="footer-links">
-            <li><a href="/privacy.html">Privacyverklaring</a></li>
+            <li><a href="/privacy">Privacyverklaring</a></li>
           </ul>
         </div>
       </div>

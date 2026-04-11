@@ -29,7 +29,7 @@ define('ENCRYPTION_KEY', 'VERANDER_DIT_NAAR_EEN_VEILIGE_SLEUTEL_VAN_64_TEKENS_LA
 
 // --- AVG/GDPR CONFIG ---
 define('DATA_RETENTION_DAYS', 365);  // Bewaar klantgegevens max 1 jaar
-define('PRIVACY_POLICY_URL', SITE_URL . '/privacy.html');
+define('PRIVACY_POLICY_URL', SITE_URL . '/privacy');
 
 // --- CORS ---
 header('Access-Control-Allow-Origin: ' . SITE_URL);
