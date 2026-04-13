@@ -421,8 +421,7 @@
               alert(response.error || 'Er is een fout opgetreden.');
             }
           } catch (err) {
-            // If JSON parse fails, still show confirmation (local testing)
-            showConfirmation(formData, null);
+            alert('Er ging iets mis bij het boeken. Probeer het opnieuw of neem contact op via info@automationsequre.nl.');
           }
         } else if (xhr.status === 409) {
           // Double booking detected!
@@ -438,8 +437,7 @@
           step1.style.display = 'block';
           renderTimeslots();
         } else {
-          // Other error — still try to show confirmation for local testing
-          showConfirmation(formData, null);
+          alert('Er ging iets mis bij het boeken. Probeer het opnieuw of neem contact op via info@automationsequre.nl.');
         }
       }
     };
@@ -447,7 +445,7 @@
     xhr.onerror = function () {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Afspraak bevestigen';
-      showConfirmation(formData, null);
+      alert('Er ging iets mis bij het boeken. Probeer het opnieuw of neem contact op via info@automationsequre.nl.');
     };
 
     xhr.send(JSON.stringify(formData));
