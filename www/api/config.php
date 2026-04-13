@@ -25,7 +25,7 @@ define('DB_PATH', __DIR__ . '/../db/bookings.sqlite');
 // --- ENCRYPTION KEY ---
 // BELANGRIJK: Verander deze key naar een willekeurige string van 32+ tekens
 // Genereer er een via: php -r "echo bin2hex(random_bytes(32));"
-define('ENCRYPTION_KEY', 'VERANDER_DIT_NAAR_EEN_VEILIGE_SLEUTEL_VAN_64_TEKENS_LANG_12345678');
+define('ENCRYPTION_KEY', '710e7bf90a1046e6200dc4ff0989164b761727d9906c2136b4417ae6d8a1f132');
 
 // --- AVG/GDPR CONFIG ---
 define('DATA_RETENTION_DAYS', 365);  // Bewaar klantgegevens max 1 jaar
