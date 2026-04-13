@@ -16,9 +16,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ /$1 [L,R=301]
 
 # -------------------------------------------------------
-# Block access to /includes/ directory
+# Block access to /includes/ and /db/ directories
 # -------------------------------------------------------
 RewriteRule ^includes/ - [F,L]
+RewriteRule ^db/ - [F,L]
 
 # -------------------------------------------------------
 # Block direct .php access — redirect to clean URL
@@ -27,6 +28,7 @@ RewriteRule ^includes/ - [F,L]
 RewriteCond %{THE_REQUEST} \s/+(.*?)\.php[\s?] [NC]
 RewriteCond %{THE_REQUEST} !\/api\/ [NC]
 RewriteCond %{THE_REQUEST} !\/book\.php [NC]
+RewriteCond %{THE_REQUEST} !\/scan\.php [NC]
 RewriteRule ^(.+)\.php$ /$1 [L,R=301]
 
 # -------------------------------------------------------

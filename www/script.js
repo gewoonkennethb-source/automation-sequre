@@ -45,10 +45,10 @@
       });
     });
 
-    // Mobile dropdown toggle for .nav-item--has-dropdown
-    var dropdownItems = document.querySelectorAll('.nav-item--has-dropdown');
+    // Mobile dropdown toggle for .nav-dropdown
+    var dropdownItems = document.querySelectorAll('.nav-dropdown');
     dropdownItems.forEach(function (item) {
-      var toggle = item.querySelector('a');
+      var toggle = item.querySelector('.nav-dropdown-toggle');
       if (!toggle) return;
 
       toggle.addEventListener('click', function (e) {
@@ -62,6 +62,7 @@
 
         // Toggle this dropdown
         item.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
       });
     });
   }
@@ -252,47 +253,79 @@
   });
 
   // -----------------------------------------------------------
-  // 8. SCAN FORM (Gratis Analyse)
+  // 8. CONTACT FORM (contact.php and legacy scanForm)
   // -----------------------------------------------------------
-  var scanForm = document.getElementById('scanForm');
-  var scanFeedback = document.getElementById('scanFeedback');
+  function setupContactForm(formId, feedbackId, fieldPrefix) {
+    var form = document.getElementById(formId);
+    var feedback = document.getElementById(feedbackId);
+    if (!form || !feedback) return;
 
-  if (scanForm) {
-    scanForm.addEventListener('submit', function (e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var name    = document.getElementById('scanName').value.trim();
-      var company = document.getElementById('scanCompany').value.trim();
-      var email   = document.getElementById('scanEmail').value.trim();
-      var phone   = document.getElementById('scanPhone') ? document.getElementById('scanPhone').value.trim() : '';
-      var service = document.getElementById('scanService') ? document.getElementById('scanService').value : '';
-      var message = document.getElementById('scanMessage') ? document.getElementById('scanMessage').value.trim() : '';
+      var name    = document.getElementById(fieldPrefix + 'Name').value.trim();
+      var company = document.getElementById(fieldPrefix + 'Company').value.trim();
+      var email   = document.getElementById(fieldPrefix + 'Email').value.trim();
+      var phoneEl = document.getElementById(fieldPrefix + 'Phone');
+      var phone   = phoneEl ? phoneEl.value.trim() : '';
+      var serviceEl = document.getElementById(fieldPrefix + 'Service');
+      var service = serviceEl ? serviceEl.value : '';
+      var messageEl = document.getElementById(fieldPrefix + 'Message');
+      var message = messageEl ? messageEl.value.trim() : '';
 
       if (!name || !company || !email) {
-        scanFeedback.textContent = 'Vul minimaal naam, bedrijfsnaam en e-mailadres in.';
-        scanFeedback.style.color = '#FF5F57';
-        scanFeedback.style.display = 'block';
+        feedback.textContent = 'Vul minimaal naam, bedrijfsnaam en e-mailadres in.';
+        feedback.style.color = '#FF5F57';
+        feedback.style.display = 'block';
         return;
       }
 
-      // Send to backend
+      // Disable submit button
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+      }
+
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'scan.php', true);
+      xhr.open('POST', '/scan.php', true);
       xhr.setRequestHeader('Content-Type', 'application/json');
-      try {
-        xhr.send(JSON.stringify({ name: name, company: company, email: email, phone: phone, service: service, message: message }));
-      } catch (err) { /* graceful fail */ }
-
-      scanFeedback.textContent = 'Aanvraag ontvangen! We nemen binnen 2 werkdagen contact met u op.';
-      scanFeedback.style.color = '#34D399';
-      scanFeedback.style.display = 'block';
-      scanForm.reset();
-
-      setTimeout(function () {
-        scanFeedback.style.display = 'none';
-      }, 6000);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '';
+          }
+          if (xhr.status >= 200 && xhr.status < 300) {
+            feedback.textContent = 'Bericht ontvangen! We nemen binnen 2 werkdagen contact met u op.';
+            feedback.style.color = '#34D399';
+            feedback.style.display = 'block';
+            form.reset();
+          } else {
+            feedback.textContent = 'Er ging iets mis. Probeer het opnieuw of mail ons op info@automationsequre.nl.';
+            feedback.style.color = '#FF5F57';
+            feedback.style.display = 'block';
+          }
+          setTimeout(function () { feedback.style.display = 'none'; }, 6000);
+        }
+      };
+      xhr.onerror = function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '';
+        }
+        feedback.textContent = 'Verbindingsfout. Controleer uw internetverbinding en probeer het opnieuw.';
+        feedback.style.color = '#FF5F57';
+        feedback.style.display = 'block';
+      };
+      xhr.send(JSON.stringify({ name: name, company: company, email: email, phone: phone, service: service, message: message }));
     });
   }
+
+  // Contact page form
+  setupContactForm('contactForm', 'contactFeedback', 'contact');
+  // Legacy scan form (backup pages)
+  setupContactForm('scanForm', 'scanFeedback', 'scan');
 
   // -----------------------------------------------------------
   // 9. CASES FILTER

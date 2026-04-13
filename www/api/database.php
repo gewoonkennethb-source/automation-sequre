@@ -256,10 +256,12 @@ class BookingDatabase {
         $affected = $this->db->changes();
 
         // Update deletion request
-        $this->db->exec(
+        $stmtUpdate = $this->db->prepare(
             "UPDATE deletion_requests SET processed_at = datetime('now','localtime'),
-             status = 'completed' WHERE email_hash = '{$emailHash}' AND status = 'pending'"
+             status = 'completed' WHERE email_hash = :hash AND status = 'pending'"
         );
+        $stmtUpdate->bindValue(':hash', $emailHash, SQLITE3_TEXT);
+        $stmtUpdate->execute();
 
         $this->logAction('data_deleted', null, "Verwijderverzoek verwerkt voor hash: {$emailHash}");
 

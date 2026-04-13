@@ -111,6 +111,47 @@ if (!preg_match('/^\d{2}:\d{2}$/', $time)) {
     exit;
 }
 
+// --- Validate booking window (server-side enforcement) ---
+$dateObj = new DateTime($date);
+$today = new DateTime('today');
+
+if ($dateObj < $today) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Datum ligt in het verleden.']);
+    exit;
+}
+
+$dayOfWeek = (int) $dateObj->format('N');
+if ($dayOfWeek >= 6) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Geen beschikbaarheid in het weekend.']);
+    exit;
+}
+
+$diff = $today->diff($dateObj)->days;
+if ($diff < BOOKED_DAYS_AHEAD) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Deze dag is niet meer beschikbaar.']);
+    exit;
+}
+
+$maxDate = (clone $today)->modify('+' . MAX_BOOKING_WEEKS . ' weeks');
+if ($dateObj > $maxDate) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Je kunt maximaal ' . MAX_BOOKING_WEEKS . ' weken vooruit boeken.']);
+    exit;
+}
+
+// --- Validate time is within slot hours ---
+$timeParts2 = explode(':', $time);
+$hour = intval($timeParts2[0]);
+$minute = intval($timeParts2[1]);
+if ($hour < SLOT_START_HOUR || $hour >= SLOT_END_HOUR || ($minute % SLOT_DURATION !== 0)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Ongeldig tijdstip.']);
+    exit;
+}
+
 // --- Create booking (with double-booking prevention) ---
 $db = new BookingDatabase();
 $result = $db->createBooking($date, $time, $personalData, $consent, $ip);
@@ -333,7 +374,10 @@ $customerHeaders .= "Content-Type: multipart/mixed; boundary=\"{$mimeBoundary}\"
 $customerHeaders .= "From: " . SITE_NAME . " <" . SITE_EMAIL . ">\r\n";
 $customerHeaders .= "Reply-To: " . SITE_EMAIL . "\r\n";
 
-$customerSent = @mail($email, $customerSubject, $customerBody, $customerHeaders);
+$customerSent = mail($email, $customerSubject, $customerBody, $customerHeaders);
+if (!$customerSent) {
+    error_log("book.php: Customer confirmation mail failed for booking #{$result['bookingId']} to {$email}");
+}
 
 // --- E-mail naar admin ---
 $adminSubject = "Nieuwe afspraak: {$fullName} ({$companyName}) - {$date} {$time}";
@@ -462,7 +506,10 @@ $adminHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
 $adminHeaders .= "From: " . SITE_NAME . " <" . SITE_EMAIL . ">\r\n";
 $adminHeaders .= "Reply-To: {$email}\r\n";
 
-@mail(ADMIN_EMAIL, $adminSubject, $adminHtml, $adminHeaders);
+$adminSent = mail(ADMIN_EMAIL, $adminSubject, $adminHtml, $adminHeaders);
+if (!$adminSent) {
+    error_log("book.php: Admin notification mail failed for booking #{$result['bookingId']}");
+}
 
 // --- Response ---
 echo json_encode([

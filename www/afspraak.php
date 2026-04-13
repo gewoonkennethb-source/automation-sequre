@@ -12,30 +12,7 @@ $current_page = 'afspraak';
 </head>
 <body data-page="afspraak">
 
-  <!-- ==================== HEADER ==================== -->
-  <?php if (file_exists(__DIR__ . '/includes/header.php')): ?>
-    <?php include 'includes/header.php'; ?>
-  <?php else: ?>
-  <header class="header scrolled" id="header">
-    <div class="container header-inner">
-      <a href="/" class="logo" aria-label="Automation SeQure homepage">
-        <span class="logo-icon">AS</span>
-        <span class="logo-text">Automation <strong>SeQure</strong></span>
-      </a>
-      <nav class="nav-links" id="navLinks" aria-label="Hoofdnavigatie">
-        <a href="/ai-automatisering">AI Automatisering</a>
-        <a href="/ai-governance-gemeenten">Gemeenten</a>
-        <a href="/cases">Cases</a>
-        <a href="/over-ons">Over ons</a>
-        <a href="/contact">Contact</a>
-        <a href="/afspraak" class="nav-cta">Plan een gesprek</a>
-      </nav>
-      <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-  <?php endif; ?>
+  <?php include 'includes/header.php'; ?>
 
   <!-- ==================== BREADCRUMB ==================== -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
