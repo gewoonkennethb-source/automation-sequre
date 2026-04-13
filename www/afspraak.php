@@ -289,6 +289,7 @@ $current_page = 'afspraak';
     <?php include 'includes/schema.php'; ?>
   <?php endif; ?>
 
+  <script src="/script.js"></script>
   <script src="/afspraak.js"></script>
 </body>
 </html>

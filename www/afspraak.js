@@ -493,25 +493,7 @@
       refHtml;
   }
 
-  // -----------------------------------------------------------
-  // MOBILE MENU
-  // -----------------------------------------------------------
-  var hamburger = document.getElementById('hamburger');
-  var navLinks  = document.getElementById('navLinks');
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', function () {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    });
-    navLinks.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
-  }
+  // Mobile menu handled by script.js (loaded before afspraak.js)
 
   // -----------------------------------------------------------
   // INIT
