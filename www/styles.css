@@ -48,6 +48,15 @@
   --radius-sm: 10px;
   --radius-xs: 6px;
 
+  /* Aliases (used by afspraak.css) */
+  --bg-card:         var(--surface);
+  --bg-elevated:     var(--surface-elevated);
+  --white:           #FFFFFF;
+  --shadow-lg:       0 16px 48px rgba(0, 0, 0, 0.4);
+  --gradient:        linear-gradient(135deg, var(--accent), var(--accent2));
+  --header-h:        72px;
+  --font-heading:    var(--font);
+
   /* Transitions */
   --ease:      0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --ease-fast: 0.15s ease;
