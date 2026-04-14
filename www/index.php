@@ -13,34 +13,53 @@ $current_page = 'home';
 
 <?php include 'includes/header.php'; ?>
 
-  <!-- ==================== HERO: SPLIT AUDIENCE ==================== -->
+  <!-- ==================== HERO: ASYMMETRIC + EVENT FEED ==================== -->
   <section class="hero" id="hero">
     <div class="hero-glow"></div>
-    <div class="container hero-content">
-      <span class="hero-label">AI Automatisering &middot; AI Governance</span>
-      <h1 class="hero-headline">&Eacute;&eacute;n partner voor AI-automatisering &eacute;n AI governance.</h1>
-      <p class="hero-sub">Automation SeQure helpt bedrijven met slimme, veilige AI-automatisering en ondersteunt gemeenten bij verantwoord AI-gebruik. Kies hieronder uw route.</p>
-      <div class="hero-routes">
-        <a href="/ai-automatisering" class="hero-route-card">
-          <div class="hero-route-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-          </div>
-          <h2>AI-automatisering</h2>
-          <p>Voor ondernemers en MKB. Automatiseer inbox, agenda, leadopvolging en workflows met veilige AI.</p>
-          <span class="hero-route-cta">Bekijk oplossingen
+    <div class="container hero-split">
+      <div class="hero-content">
+        <span class="hero-label">AI Automatisering &amp; Governance</span>
+        <h1 class="hero-headline">Veilige AI die werkt voor uw organisatie.</h1>
+        <p class="hero-sub">Van slimme e-mailassistenten tot compliance-ready governance. Alles draait op uw eigen infrastructuur, zonder vendor lock-in.</p>
+        <div class="hero-buttons">
+          <a href="/afspraak" class="btn btn-primary btn-lg">Plan een gesprek
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-        <a href="/ai-governance-gemeenten" class="hero-route-card">
-          <div class="hero-route-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h2>AI Governance</h2>
-          <p>Voor gemeenten. Grip op AI-gebruik, compliant met de EU AI Act en verantwoording richting bestuur en raad.</p>
-          <span class="hero-route-cta">Bekijk governance
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
+          </a>
+          <a href="/cases" class="btn btn-outline btn-lg">Bekijk cases</a>
+        </div>
+      </div>
+      <div class="hero-feed">
+        <div class="hero-feed-header">
+          <span class="hero-feed-dot"></span>
+          <span>Live automatisering feed</span>
+        </div>
+        <ul class="hero-feed-list">
+          <li class="hero-feed-item">
+            <span class="hero-feed-time">14:23</span>
+            <span class="hero-feed-desc"><strong>Inbox Manager</strong> 12 e-mails getrieerd, 3 concept-antwoorden klaargezet</span>
+            <span class="hero-feed-tag">inbox</span>
+          </li>
+          <li class="hero-feed-item">
+            <span class="hero-feed-time">14:18</span>
+            <span class="hero-feed-desc"><strong>Sales Chatbot</strong> Lead gekwalificeerd: Bakkerij Vermeer, interesse in workflow automatisering</span>
+            <span class="hero-feed-tag">lead</span>
+          </li>
+          <li class="hero-feed-item">
+            <span class="hero-feed-time">14:12</span>
+            <span class="hero-feed-desc"><strong>Compliance Check</strong> AI Act art. 6 risico-classificatie gemeente Delft</span>
+            <span class="hero-feed-tag hero-feed-tag--cyan">governance</span>
+          </li>
+          <li class="hero-feed-item">
+            <span class="hero-feed-time">14:07</span>
+            <span class="hero-feed-desc"><strong>Appointment Setter</strong> Demo ingepland: dinsdag 15 april, 10:00</span>
+            <span class="hero-feed-tag">agenda</span>
+          </li>
+          <li class="hero-feed-item">
+            <span class="hero-feed-time">13:55</span>
+            <span class="hero-feed-desc"><strong>Workflow</strong> Offerte #2847 automatisch gegenereerd en verstuurd</span>
+            <span class="hero-feed-tag">workflow</span>
+          </li>
+        </ul>
       </div>
     </div>
   </section>

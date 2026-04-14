@@ -77,7 +77,7 @@ HTML;
 $messageRow = '';
 if ($message) {
     $messageRow = <<<HTML
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:20px 0 12px;">Bericht</p>
+      <p style="color:#2ECB6F;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:20px 0 12px;">Bericht</p>
       <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
         <p style="font-size:14px;line-height:1.6;margin:0;color:#EAEDF6;">{$message}</p>
       </div>
@@ -91,7 +91,7 @@ $html = <<<HTML
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#0A0A0F;color:#B0B3C0;">
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
-      <div style="display:inline-block;background:linear-gradient(135deg,#6C5CE7,#00D2FF);padding:10px 20px;border-radius:10px;">
+      <div style="display:inline-block;background:linear-gradient(135deg,#2ECB6F,#00D2FF);padding:10px 20px;border-radius:10px;">
         <span style="color:#fff;font-size:18px;font-weight:bold;">Automation SeQure</span>
       </div>
     </div>
@@ -99,7 +99,7 @@ $html = <<<HTML
       <h1 style="color:#EAEDF6;font-size:22px;margin:0 0 6px;">Nieuw contactformulier</h1>
       <p style="color:#6B6F80;font-size:13px;margin:0 0 24px;">Via de website ontvangen</p>
 
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Contactgegevens</p>
+      <p style="color:#2ECB6F;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Contactgegevens</p>
       <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
           <tr><td style="padding:8px 0;color:#6B6F80;width:120px;">Naam</td>
@@ -107,9 +107,9 @@ $html = <<<HTML
           <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Bedrijf</td>
               <td style="padding:8px 0;color:#EAEDF6;font-weight:600;border-top:1px solid rgba(255,255,255,0.06);">{$company}</td></tr>
           <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">E-mail</td>
-              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="mailto:{$email}" style="color:#6C5CE7;text-decoration:none;">{$email}</a></td></tr>
+              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="mailto:{$email}" style="color:#2ECB6F;text-decoration:none;">{$email}</a></td></tr>
           <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Telefoon</td>
-              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="tel:{$phone}" style="color:#6C5CE7;text-decoration:none;">{$phone}</a></td></tr>
+              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="tel:{$phone}" style="color:#2ECB6F;text-decoration:none;">{$phone}</a></td></tr>
 {$serviceRow}
         </table>
       </div>

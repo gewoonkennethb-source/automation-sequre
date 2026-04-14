@@ -39,19 +39,19 @@ $current_page = 'afspraak';
             <h3>Wat u kunt verwachten:</h3>
             <ul>
               <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2ECB6F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 Verkenning van uw processen en uitdagingen
               </li>
               <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2ECB6F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 Eerste inschatting van automatiseringsmogelijkheden
               </li>
               <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2ECB6F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 Advies over passende AI-oplossing
               </li>
               <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2ECB6F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 Vrijblijvend en zonder verplichtingen
               </li>
             </ul>

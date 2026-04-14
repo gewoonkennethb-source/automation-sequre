@@ -31,9 +31,11 @@ $og_image = isset($page_og_image) ? $page_og_image : 'https://automationsequre.n
 <link rel="apple-touch-icon" href="/favicon.png">
 
 <!-- Fonts -->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- Styles -->
 <link rel="stylesheet" href="/styles.css">

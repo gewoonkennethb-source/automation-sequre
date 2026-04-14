@@ -245,7 +245,7 @@ $customerHtml = <<<HTML
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#0A0A0F;color:#B0B3C0;">
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
-      <div style="display:inline-block;background:linear-gradient(135deg,#6C5CE7,#00D2FF);padding:10px 20px;border-radius:10px;">
+      <div style="display:inline-block;background:linear-gradient(135deg,#2ECB6F,#00D2FF);padding:10px 20px;border-radius:10px;">
         <span style="color:#fff;font-size:18px;font-weight:bold;">Automation SeQure</span>
       </div>
     </div>
@@ -256,13 +256,13 @@ $customerHtml = <<<HTML
       <!-- CTA: Toevoegen aan agenda -->
       <div style="text-align:center;margin-bottom:28px;">
         <a href="{$outlookCustomerLink}" target="_blank"
-           style="display:inline-block;background:linear-gradient(135deg,#6C5CE7,#00D2FF);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:10px;">
+           style="display:inline-block;background:linear-gradient(135deg,#2ECB6F,#00D2FF);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:10px;">
           &#128197; Toevoegen aan Outlook Agenda
         </a>
       </div>
 
       <!-- Jouw gegevens -->
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Jouw gegevens</p>
+      <p style="color:#2ECB6F;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Jouw gegevens</p>
       <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
           <tr><td style="padding:8px 0;color:#6B6F80;width:120px;">Naam</td>
@@ -277,7 +277,7 @@ $customerHtml = <<<HTML
       </div>
 
       <!-- Afspraak details -->
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Afspraak</p>
+      <p style="color:#2ECB6F;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Afspraak</p>
       <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
           <tr><td style="padding:8px 0;color:#6B6F80;width:120px;">Datum</td>
@@ -309,7 +309,7 @@ $customerHtml .= <<<HTML
       </div>
 
       <!-- Meer agenda opties -->
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;text-align:center;">Andere agenda?</p>
+      <p style="color:#2ECB6F;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;text-align:center;">Andere agenda?</p>
       <div style="text-align:center;margin-bottom:24px;">
         <a href="{$gcalLink}" target="_blank"
            style="display:inline-block;background:#1A1A25;border:1px solid rgba(255,255,255,0.1);color:#EAEDF6;text-decoration:none;font-weight:600;font-size:13px;padding:10px 20px;border-radius:8px;margin:4px;">
@@ -326,14 +326,14 @@ $customerHtml .= <<<HTML
         <p style="font-size:14px;line-height:1.6;margin:0;color:#B0B3C0;">
           Wij nemen op het afgesproken tijdstip contact met je op via Teams of telefoon.
           Heb je vragen of wil je de afspraak wijzigen? Stuur ons gerust een bericht op
-          <a href="mailto:{$siteEmail}" style="color:#6C5CE7;text-decoration:none;">{$siteEmail}</a>.
+          <a href="mailto:{$siteEmail}" style="color:#2ECB6F;text-decoration:none;">{$siteEmail}</a>.
         </p>
       </div>
 
       <!-- Spam waarschuwing -->
       <div style="background:rgba(108,92,231,0.08);border:1px solid rgba(108,92,231,0.2);border-radius:8px;padding:14px 16px;margin-bottom:20px;">
         <p style="margin:0;font-size:13px;line-height:1.5;color:#B0B3C0;">
-          <span style="color:#6C5CE7;font-weight:700;">&#9993; Tip:</span>
+          <span style="color:#2ECB6F;font-weight:700;">&#9993; Tip:</span>
           Controleer ook je <strong style="color:#EAEDF6;">spam- of ongewenste e-mail map</strong>. Onze e-mails kunnen daar terechtkomen.
           Markeer ons als veilige afzender om toekomstige berichten direct in je inbox te ontvangen.
         </p>
@@ -342,7 +342,7 @@ $customerHtml .= <<<HTML
       <!-- AVG -->
       <p style="font-size:12px;color:#6B6F80;line-height:1.5;margin:0;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;">
         Je gegevens worden versleuteld opgeslagen en verwerkt conform onze
-        <a href="{$privacyUrl}" style="color:#6C5CE7;">privacyverklaring</a>.
+        <a href="{$privacyUrl}" style="color:#2ECB6F;">privacyverklaring</a>.
         Je kunt op elk moment verzoeken om verwijdering van je gegevens door te mailen naar {$siteEmail}.
       </p>
     </div>
@@ -415,7 +415,7 @@ $adminHtml = <<<HTML
 <body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#0A0A0F;color:#B0B3C0;">
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
-      <div style="display:inline-block;background:linear-gradient(135deg,#6C5CE7,#00D2FF);padding:10px 20px;border-radius:10px;">
+      <div style="display:inline-block;background:linear-gradient(135deg,#2ECB6F,#00D2FF);padding:10px 20px;border-radius:10px;">
         <span style="color:#fff;font-size:18px;font-weight:bold;">Automation SeQure</span>
       </div>
     </div>
@@ -426,13 +426,13 @@ $adminHtml = <<<HTML
       <!-- CTA: Teams Meeting -->
       <div style="text-align:center;margin-bottom:28px;">
         <a href="{$outlookDeepLink}" target="_blank"
-           style="display:inline-block;background:linear-gradient(135deg,#6C5CE7,#00D2FF);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:10px;">
+           style="display:inline-block;background:linear-gradient(135deg,#2ECB6F,#00D2FF);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:10px;">
           &#128197; Plan Teams Meeting in Outlook
         </a>
       </div>
 
       <!-- Klantgegevens -->
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Klantgegevens</p>
+      <p style="color:#2ECB6F;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Klantgegevens</p>
       <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
           <tr><td style="padding:8px 0;color:#6B6F80;width:120px;">Naam</td>
@@ -450,14 +450,14 @@ HTML;
 
 $adminHtml .= <<<HTML
           <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">E-mail</td>
-              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="mailto:{$email}" style="color:#6C5CE7;text-decoration:none;">{$email}</a></td></tr>
+              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="mailto:{$email}" style="color:#2ECB6F;text-decoration:none;">{$email}</a></td></tr>
           <tr><td style="padding:8px 0;color:#6B6F80;border-top:1px solid rgba(255,255,255,0.06);">Telefoon</td>
-              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="tel:{$phone}" style="color:#6C5CE7;text-decoration:none;">{$phone}</a></td></tr>
+              <td style="padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);"><a href="tel:{$phone}" style="color:#2ECB6F;text-decoration:none;">{$phone}</a></td></tr>
         </table>
       </div>
 
       <!-- Afspraak details -->
-      <p style="color:#6C5CE7;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Afspraak</p>
+      <p style="color:#2ECB6F;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px;">Afspraak</p>
       <div style="background:#1A1A25;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;margin-bottom:20px;">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
           <tr><td style="padding:8px 0;color:#6B6F80;width:120px;">Datum</td>
