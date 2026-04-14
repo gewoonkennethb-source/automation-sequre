@@ -232,6 +232,11 @@ h3 { font-size: var(--h3); }
   font-size: 1.25rem;
   color: var(--text-light);
   flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 4px;
   line-height: 1;
   transition: var(--ease-fast);
