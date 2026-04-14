@@ -35,22 +35,9 @@
   transform: rotate(180deg);
 }
 
-.nav-dropdown-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 260px;
-  background: var(--surface-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 8px 0;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-  z-index: 120;
-  opacity: 0;
-  transition: opacity var(--ease-fast);
-}
+/* Nav dropdown menu styles moved to styles.css — do not duplicate here.
+   The dropdown uses opacity/visibility transitions, not display:none/block.
+   JS adds .open to .nav-dropdown (the wrapper), not .nav-dropdown-menu. */
 .nav-dropdown-menu::before {
   content: '';
   position: absolute;
@@ -58,10 +45,6 @@
   left: 0;
   right: 0;
   height: 8px;
-}
-.nav-dropdown-menu.open {
-  display: block;
-  opacity: 1;
 }
 
 .nav-dropdown-menu a {
